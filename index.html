@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoxLead — AI Receptionist for Dentists & Local Businesses</title>
-  <meta name="description" content="Never miss a call again. VoxLead’s AI Receptionist answers 24/7, books appointments, and sends confirmations. Plug into your workflow in minutes." />
-  <meta property="og:title" content="VoxLead — AI Receptionist" />
-  <meta property="og:description" content="24/7 AI phone agent that books appointments and captures every lead." />
+  <title>VoxLead — DFY AI Receptionist that books calls for you</title>
+  <meta name="description" content="Phase 1 DFY: We set up a 24/7 AI phone agent for your business in 24 hours. Live demo, real bookings, and managed operations for $199/mo after a $499 setup." />
+  <meta property="og:title" content="VoxLead — DFY AI Receptionist" />
+  <meta property="og:description" content="Done-for-you AI receptionist. We handle Twilio + VAPI, script, voice, and booking. Demo today, live tomorrow." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ef" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0b0f14;--panel:#0e131a;--soft:#131a22;--text:#e6f6ff;
@@ -30,7 +31,9 @@
     .btn.brand{border-color:rgba(0,229,255,.6);background:linear-gradient(90deg,rgba(0,229,255,.18),rgba(123,97,255,.18))}
     .btn.small{padding:9px 14px;font-size:14px}
     .hero{position:relative;padding:88px 0 48px}
-    .blob{position:absolute;inset:-20% -10% auto -10%;height:70vh;background:radial-gradient(50% 40% at 40% 40%,rgba(0,229,255,.25),transparent 60%),radial-gradient(40% 35% at 70% 30%,rgba(123,97,255,.22),transparent 60%);filter:blur(50px);opacity:.7;pointer-events:none}
+    .blob{position:absolute;inset:-20% -10% auto -10%;height:70vh;background:
+      radial-gradient(50% 40% at 40% 40%,rgba(0,229,255,.25),transparent 60%),
+      radial-gradient(40% 35% at 70% 30%,rgba(123,97,255,.22),transparent 60%);filter:blur(50px);opacity:.7;pointer-events:none}
     h1{font-size:clamp(32px,6vw,52px);line-height:1.02;margin:0 0 12px}
     .lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
@@ -44,17 +47,22 @@
     .section h2{font-size:clamp(24px,4vw,36px);margin:0 0 10px}
     .band{display:flex;gap:14px;flex-wrap:wrap}
     .badge{padding:8px 12px;border:1px dashed rgba(0,229,255,.35);border-radius:999px;color:#bfefff}
-    .pricing{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .list{display:grid;gap:8px;margin:8px 0 0 0}
+    .offer{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
     .price{font-size:36px;font-weight:800}
-    .strike{opacity:.7;text-decoration:line-through;font-weight:400;font-size:16px;margin-left:6px}
     .ok{color:var(--good)}
     .form{display:grid;gap:12px;max-width:560px}
     input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #203142;background:#0a121a;color:#eaf6ff}
     .footer{border-top:1px solid #172433;padding:22px 0;color:#9eb3c5}
     .hidden{display:none}
-    /* small anims */
     .pulse{box-shadow:0 0 0 0 rgba(0,229,255,.6);animation:pulse 2s infinite}
     @keyframes pulse {to{box-shadow:0 0 0 14px rgba(0,229,255,0)}}
+    .cta-strip{position:sticky;bottom:0;z-index:40;background:rgba(10,14,20,.9);backdrop-filter:blur(10px);border-top:1px solid #172433}
+    .cta-strip .inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+    .demo-table{width:100%;border-collapse:separate;border-spacing:0 8px}
+    .demo-table td{padding:12px 14px;background:#0e141c;border:1px solid #1b2633}
+    .demo-table td:first-child{border-radius:10px 0 0 10px}
+    .demo-table td:last-child{border-radius:0 10px 10px 0}
   </style>
 </head>
 <body>
@@ -62,11 +70,11 @@
     <div class="container nav-inner">
       <div class="logo">
         <span class="pill">VoxLead</span>
-        <span class="muted" style="font-weight:600">AI Receptionist</span>
+        <span class="muted" style="font-weight:600">DFY AI Receptionist</span>
       </div>
       <div class="band">
-        <a href="#pricing" class="btn small">Pricing</a>
-        <a href="#demo" class="btn small brand">Try a demo call</a>
+        <a href="#demo" class="btn small brand">Call live demo</a>
+        <a href="#offer" class="btn small">DFY setup</a>
       </div>
     </div>
   </nav>
@@ -74,131 +82,132 @@
   <header class="hero">
     <div class="blob"></div>
     <div class="container">
-      <h1>Never miss a call again.<br/>Book appointments 24/7 with an AI phone agent.</h1>
-      <p class="lead">VoxLead answers calls instantly, qualifies patients, checks availability, books or reschedules, and sends confirmations by SMS. Perfect for dentists and local clinics that lose leads after hours.</p>
+      <h1>Your 24/7 AI Receptionist.<br/>Set up for you in 24 hours.</h1>
+      <p class="lead">We install a trained AI phone agent that answers, qualifies, books, and texts confirmations. You approve the script. We handle the rest.</p>
       <div class="hero-cta">
         <a href="#lead" class="btn brand pulse">Get a free setup call</a>
-        <span class="kbd">Demo: <strong>+1 (323) 870 9970</strong></span>
+        <span class="kbd">Live Demo: <strong>+1 (323) 870 9970</strong></span>
       </div>
 
       <div class="features grid">
-        <div class="card"><h3>24/7 Answering</h3><p class="muted">No voicemail black hole. Every call captured and logged.</p></div>
-        <div class="card"><h3>Smart Scheduling</h3><p class="muted">Books, confirms, cancels, and reschedules per your rules.</p></div>
-        <div class="card"><h3>SMS Follow-ups</h3><p class="muted">Instant text confirmations and payment links.</p></div>
-        <div class="card"><h3>HIPAA-aware</h3><p class="muted">Configurable consent + redaction policies.</p></div>
+        <div class="card"><h3>24/7 Answering</h3><p class="muted">Capture every call. No voicemail black hole.</p></div>
+        <div class="card"><h3>Booking + SMS</h3><p class="muted">Books, confirms, reschedules, and sends texts.</p></div>
+        <div class="card"><h3>Managed for You</h3><p class="muted">We maintain the prompts, flows, and rules.</p></div>
+        <div class="card"><h3>Fast Go-Live</h3><p class="muted">Personalized line provisioned in 24 hours.</p></div>
       </div>
 
       <div class="band">
-        <span class="badge">Works with Google Calendar</span>
-        <span class="badge">Twilio / Vapi.ai</span>
+        <span class="badge">Twilio + Vapi.ai</span>
+        <span class="badge">Google Calendar / booking link</span>
         <span class="badge">Call logs → Google Sheets</span>
-        <span class="badge">LA-based rollout</span>
+        <span class="badge">Beverly Hills based</span>
       </div>
     </div>
   </header>
 
-  <section class="section">
+  <section class="section" id="demo">
     <div class="container">
-      <h2>Missed calls = missed revenue</h2>
-      <p class="muted">Most practices miss 20–40% of calls during peak times and after hours. VoxLead turns those into booked appointments automatically.</p>
-      <div id="demo" class="card" style="margin-top:16px">
-        <h3>Try the live demo</h3>
-        <p class="muted">Call <strong>+1 (323) 870 9970</strong>. Ask to “book a cleaning next Tuesday morning” or “reschedule my appointment.”</p>
+      <h2>Hear it answer in real time</h2>
+      <p class="muted">Call the live demo line below. Try: “Book a cleaning next Tuesday morning.” Calls are limited to ~2 minutes.</p>
+      <table class="demo-table" role="presentation" style="margin-top:12px">
+        <tr>
+          <td style="width:30%"><strong>Dental Reception</strong></td>
+          <td style="width:40%"><span class="kbd">+1 (323) 870 9970</span></td>
+          <td><a class="btn small" href="tel:+13238709970">Call now</a></td>
+        </tr>
+      </table>
+      <p class="muted" style="margin-top:8px">More niche demos (MedSpa / HVAC) coming next.</p>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <div class="card"><h3>1) We handle everything</h3><p class="muted">Number, script, voice, rules, and integrations.</p></div>
+        <div class="card"><h3>2) You test the demo</h3><p class="muted">We iterate wording and booking logic together.</p></div>
+        <div class="card"><h3>3) We deploy in 24h</h3><p class="muted">Go live with logging and SMS confirmations.</p></div>
       </div>
     </div>
   </section>
 
-  <section id="pricing" class="section">
+  <section class="section" id="offer">
     <div class="container">
-      <h2>Simple pricing</h2>
-      <div class="grid pricing">
+      <h2>Done-for-you offer</h2>
+      <div class="offer">
         <div class="card">
-          <h3>Starter</h3>
-          <p class="muted">Solo office, low volume</p>
-          <p class="price">$149<span class="strike">$299</span>/mo</p>
-          <ul class="muted">
-            <li>1 line, 500 mins</li>
-            <li>Basic booking rules</li>
-            <li>SMS confirmations</li>
-            <li>Google Sheets logging</li>
+          <h3>Setup (one-time)</h3>
+          <p class="price">$499</p>
+          <ul class="list muted">
+            <li>Twilio number provisioning</li>
+            <li>VAPI agent + custom voice</li>
+            <li>Prompt + call flow design</li>
+            <li>Booking + SMS wiring</li>
           </ul>
-          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_STARTER">Start Starter</a>
+          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_SETUP">$499 — Start setup</a>
         </div>
         <div class="card" style="outline:1px solid rgba(0,229,255,.35);">
-          <h3>Growth</h3>
-          <p class="muted">Multi-chair, higher volume</p>
-          <p class="price">$349<span class="strike">$499</span>/mo</p>
-          <ul class="muted">
-            <li>3 lines, 2,000 mins</li>
-            <li>Custom prompts + workflows</li>
-            <li>Two-way reminders</li>
-            <li>Webhook to EHR/CRM</li>
+          <h3>Managed (monthly)</h3>
+          <p class="price">$199<span style="font-size:16px;font-weight:600">/mo</span></p>
+          <ul class="list muted">
+            <li>Ongoing prompt tuning</li>
+            <li>Minutes & routing monitoring</li>
+            <li>Monthly reporting to Sheets</li>
+            <li>Priority support</li>
           </ul>
-          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_GROWTH">Start Growth</a>
-        </div>
-        <div class="card">
-          <h3>Enterprise</h3>
-          <p class="muted">Multi-location</p>
-          <p class="price">Custom</p>
-          <ul class="muted">
-            <li>Unlimited lines</li>
-            <li>Priority routing + squads</li>
-            <li>BAA / compliance review</li>
-            <li>Dedicated support</li>
-          </ul>
-          <a class="btn" href="#lead">Talk to sales</a>
+          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_MANAGED">$199/mo — Subscribe</a>
         </div>
       </div>
-      <p class="muted" style="margin-top:10px">Minute overages billed at actual provider cost + margin. Cancel anytime.</p>
+      <p class="muted" style="margin-top:10px">Twilio usage billed at carrier rates. Cancel anytime.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <h2>What customers say</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
-        <div class="card"><p>“Booked 27 after-hours appointments the first month. Paid for itself.”</p><p class="muted">— Beverly Smiles</p></div>
-        <div class="card"><p>“Our no-shows dropped 18% with SMS confirmations.”</p><p class="muted">— Glendale Ortho</p></div>
-        <div class="card"><p>“Setup took one day. Team loves the reduced call burden.”</p><p class="muted">— Marina Dental</p></div>
+      <h2>Early client program</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <div class="card"><p>“We stopped missing after-hours calls day one.”</p><p class="muted">— Dental pilot</p></div>
+        <div class="card"><p>“AI assistant handles reschedules without staff.”</p><p class="muted">— Clinic pilot</p></div>
+        <div class="card"><p>“Setup was fast. Script sounds on-brand.”</p><p class="muted">— Practice manager</p></div>
       </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>FAQ</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-        <div class="card"><h3>How do bookings work?</h3><p class="muted">We connect to your Google Calendar or booking link, honor buffers, and follow your rules by provider.</p></div>
-        <div class="card"><h3>Does it replace my staff?</h3><p class="muted">No. It handles overflow and after hours. Your staff sees cleaner calendars and fewer voicemails.</p></div>
-        <div class="card"><h3>What about compliance?</h3><p class="muted">We enable consent prompts, redaction, and secure logs. Enterprise plans include BAA review.</p></div>
-      </div>
+      <p class="muted" style="margin-top:10px">We’re collecting 5 case studies now. Join and be featured.</p>
     </div>
   </section>
 
   <section id="lead" class="section" style="padding-bottom:84px;">
     <div class="container">
       <h2>Get a free setup call</h2>
-      <p class="muted">Tell us about your practice. We’ll provision a demo line and show bookings in 24 hours.</p>
+      <p class="muted">Tell us about your business. We’ll provision a demo line and show bookings within 24 hours.</p>
       <form id="leadForm" class="form card" autocomplete="on">
         <input name="name" placeholder="Full name" required />
         <input name="email" placeholder="Work email" type="email" required />
         <input name="phone" placeholder="Mobile or office phone" />
-        <input name="company" placeholder="Practice / Business name" />
-        <textarea name="notes" placeholder="Anything specific? e.g., hours, insurances" rows="4"></textarea>
+        <input name="company" placeholder="Business name" />
+        <textarea name="notes" placeholder="What should your AI say? Preferred hours, rules…" rows="4"></textarea>
         <button class="btn brand" type="submit">Submit</button>
-        <p id="ok" class="ok hidden">Thanks — we’ll reach out within 1 business day.</p>
+        <p id="ok" class="ok hidden">Thanks — we’ll text or email you within 1 business day.</p>
         <p id="err" class="muted hidden">Submission failed. Email hello@voxlead.agency and we’ll assist.</p>
       </form>
     </div>
   </section>
 
+  <div class="cta-strip">
+    <div class="container inner">
+      <div class="muted">Live demo: <strong>+1 (323) 870 9970</strong></div>
+      <div class="band">
+        <a href="#offer" class="btn small brand">Start $499 setup</a>
+        <a href="#lead" class="btn small">Free setup call</a>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>© <span id="y"></span> VoxLead Agency</div>
+      <div>© <span id="y"></span> VoxLead Agency • 9350 Wilshire Blvd, Beverly Hills</div>
       <div class="band">
+        <a href="mailto:hello@voxlead.agency" class="muted">hello@voxlead.agency</a>
         <a href="#" class="muted">Terms</a>
         <a href="#" class="muted">Privacy</a>
-        <a href="#" class="muted">Contact</a>
       </div>
     </div>
   </footer>
@@ -216,7 +225,7 @@
       e.preventDefault();
       ok.classList.add('hidden'); err.classList.add('hidden');
       const data = Object.fromEntries(new FormData(f).entries());
-      data.source = 'voxlead-landing';
+      data.source = 'voxlead-landing-dfy';
       try{
         const res = await fetch(WEBHOOK, {
           method:'POST',
@@ -231,7 +240,7 @@
       }
     });
 
-    // Smooth scroll for in-page anchors
+    // Smooth scroll
     for (const a of document.querySelectorAll('a[href^="#"]')) {
       a.addEventListener('click', e => {
         const id = a.getAttribute('href').slice(1);
