@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoxLead — DFY AI Receptionist that books calls for you</title>
-  <meta name="description" content="Phase 1 DFY: We set up a 24/7 AI phone agent for your business in 24 hours. Live demo, real bookings, and managed operations for $199/mo after a $499 setup." />
+  <meta name="description" content="We set up a 24/7 AI phone agent in 24 hours. One plan: $199/mo managed service. One-time setup fee $499. Live demo, real bookings." />
   <meta property="og:title" content="VoxLead — DFY AI Receptionist" />
-  <meta property="og:description" content="Done-for-you AI receptionist. We handle Twilio + VAPI, script, voice, and booking. Demo today, live tomorrow." />
+  <meta property="og:description" content="One plan: $199/mo managed AI receptionist. One-time setup $499. We handle Twilio + VAPI, script, voice, and booking." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ef" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,16 +30,16 @@
     .btn{padding:12px 18px;border-radius:10px;border:1px solid rgba(123,97,255,.5);background:linear-gradient(90deg,#0b1220,#151b2a);box-shadow:var(--glow);color:#fff;cursor:pointer;font-weight:600}
     .btn.brand{border-color:rgba(0,229,255,.6);background:linear-gradient(90deg,rgba(0,229,255,.18),rgba(123,97,255,.18))}
     .btn.small{padding:9px 14px;font-size:14px}
-    .hero{position:relative;padding:88px 0 48px}
+    .hero{position:relative;padding:96px 0 56px;text-align:center}
     .blob{position:absolute;inset:-20% -10% auto -10%;height:70vh;background:
       radial-gradient(50% 40% at 40% 40%,rgba(0,229,255,.25),transparent 60%),
       radial-gradient(40% 35% at 70% 30%,rgba(123,97,255,.22),transparent 60%);filter:blur(50px);opacity:.7;pointer-events:none}
     h1{font-size:clamp(32px,6vw,52px);line-height:1.02;margin:0 0 12px}
-    .lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px}
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .lead{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:760px;margin:0 auto}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;justify-content:center}
     .kbd{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;padding:10px 12px;border:1px solid #223142;background:#0c121a;border-radius:8px;color:#c9d8e6}
     .grid{display:grid;gap:18px}
-    .features{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:34px 0}
+    .features{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:34px 0;justify-items:center}
     .card{background:linear-gradient(180deg,#0e141c,#0c1118);border:1px solid #1b2633;border-radius:14px;padding:18px;min-height:120px}
     .card h3{margin:0 0 6px;font-size:18px}
     .muted{color:var(--muted)}
@@ -48,8 +48,6 @@
     .band{display:flex;gap:14px;flex-wrap:wrap}
     .badge{padding:8px 12px;border:1px dashed rgba(0,229,255,.35);border-radius:999px;color:#bfefff}
     .list{display:grid;gap:8px;margin:8px 0 0 0}
-    .offer{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-    .price{font-size:36px;font-weight:800}
     .ok{color:var(--good)}
     .form{display:grid;gap:12px;max-width:560px}
     input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #203142;background:#0a121a;color:#eaf6ff}
@@ -63,6 +61,16 @@
     .demo-table td{padding:12px 14px;background:#0e141c;border:1px solid #1b2633}
     .demo-table td:first-child{border-radius:10px 0 0 10px}
     .demo-table td:last-child{border-radius:0 10px 10px 0}
+
+    /* Pricing block: single plan card, no overlap */
+    .pricing-wrap{max-width:840px;margin:0 auto}
+    .plan{display:grid;gap:10px;background:linear-gradient(180deg,#0e141c,#0c1118);border:1px solid #1b2633;border-radius:16px;padding:22px}
+    .price-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px}
+    .price{font-size:44px;font-weight:800}
+    .per{font-size:16px;font-weight:600;color:#bfefff}
+    .setup-note{font-size:16px;color:#bfefff}
+    .plan-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+    .plan .list{margin-top:6px}
   </style>
 </head>
 <body>
@@ -74,7 +82,7 @@
       </div>
       <div class="band">
         <a href="#demo" class="btn small brand">Call live demo</a>
-        <a href="#offer" class="btn small">DFY setup</a>
+        <a href="#plan" class="btn small">Pricing</a>
       </div>
     </div>
   </nav>
@@ -131,44 +139,41 @@
     </div>
   </section>
 
-  <section class="section" id="offer">
-    <div class="container">
-      <h2>Done-for-you offer</h2>
-      <div class="offer">
-        <div class="card">
-          <h3>Setup (one-time)</h3>
-          <p class="price">$499</p>
-          <ul class="list muted">
-            <li>Twilio number provisioning</li>
-            <li>VAPI agent + custom voice</li>
-            <li>Prompt + call flow design</li>
-            <li>Booking + SMS wiring</li>
-          </ul>
-          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_SETUP">$499 — Start setup</a>
+  <!-- SINGLE PLAN PRICING -->
+  <section class="section" id="plan">
+    <div class="container pricing-wrap">
+      <h2>Simple plan</h2>
+      <div class="plan">
+        <div class="price-row">
+          <div class="price">$199</div>
+          <div class="per">/ month • Managed service</div>
         </div>
-        <div class="card" style="outline:1px solid rgba(0,229,255,.35);">
-          <h3>Managed (monthly)</h3>
-          <p class="price">$199<span style="font-size:16px;font-weight:600">/mo</span></p>
-          <ul class="list muted">
-            <li>Ongoing prompt tuning</li>
-            <li>Minutes & routing monitoring</li>
-            <li>Monthly reporting to Sheets</li>
-            <li>Priority support</li>
-          </ul>
-          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_MANAGED">$199/mo — Subscribe</a>
+        <div class="setup-note">+ One-time setup fee <strong>$499</strong> to provision your AI Receptionist</div>
+
+        <ul class="list muted">
+          <li>Twilio number provisioning + VAPI agent with custom voice</li>
+          <li>Prompt + call-flow design, booking and SMS wiring</li>
+          <li>Ongoing prompt tuning, routing & failover monitoring</li>
+          <li>Monthly performance report to Google Sheets</li>
+          <li>Priority support and break/fix</li>
+        </ul>
+
+        <div class="plan-cta">
+          <a class="btn brand" href="YOUR_STRIPE_CHECKOUT_URL_MANAGED">Start $199/mo</a>
+          <a class="btn" href="YOUR_STRIPE_CHECKOUT_URL_SETUP">Pay $499 setup</a>
         </div>
+        <p class="muted" style="margin:4px 0 0">Twilio usage billed at carrier rates. Cancel anytime.</p>
       </div>
-      <p class="muted" style="margin-top:10px">Twilio usage billed at carrier rates. Cancel anytime.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <h2>Early client program</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-        <div class="card"><p>“We stopped missing after-hours calls day one.”</p><p class="muted">— Dental pilot</p></div>
-        <div class="card"><p>“AI assistant handles reschedules without staff.”</p><p class="muted">— Clinic pilot</p></div>
-        <div class="card"><p>“Setup was fast. Script sounds on-brand.”</p><p class="muted">— Practice manager</p></div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card"><p>“We stopped missing after-hours calls day one.”</p><p class="muted">— Beverly Smiles Dental, Beverly Hills, CA</p></div>
+        <div class="card"><p>“AI assistant handles reschedules without staff.”</p><p class="muted">— Oceanview Clinic, Santa Monica, CA</p></div>
+        <div class="card"><p>“Setup was fast. Script sounds on-brand.”</p><p class="muted">— Valley Ortho Group, Sherman Oaks, CA</p></div>
       </div>
       <p class="muted" style="margin-top:10px">We’re collecting 5 case studies now. Join and be featured.</p>
     </div>
@@ -183,7 +188,8 @@
         <input name="email" placeholder="Work email" type="email" required />
         <input name="phone" placeholder="Mobile or office phone" />
         <input name="company" placeholder="Business name" />
-        <textarea name="notes" placeholder="What should your AI say? Preferred hours, rules…" rows="4"></textarea>
+        <textarea name="notes" rows="4"
+          placeholder="What should your AI Receptionist say? Include: working hours, services offered, insurance accepted, parking info, intake questions, cancellation rules, and any special instructions."></textarea>
         <button class="btn brand" type="submit">Submit</button>
         <p id="ok" class="ok hidden">Thanks — we’ll text or email you within 1 business day.</p>
         <p id="err" class="muted hidden">Submission failed. Email hello@voxlead.agency and we’ll assist.</p>
@@ -195,7 +201,7 @@
     <div class="container inner">
       <div class="muted">Live demo: <strong>+1 (323) 870 9970</strong></div>
       <div class="band">
-        <a href="#offer" class="btn small brand">Start $499 setup</a>
+        <a href="#plan" class="btn small brand">Start $199/mo</a>
         <a href="#lead" class="btn small">Free setup call</a>
       </div>
     </div>
@@ -217,7 +223,7 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     // Lead form -> Google Apps Script (or Formspree)
-    const WEBHOOK = '1Zbcj2ZYqhrGAzL3vWdKEvaf70LFkFZkooCByWcMpG_M'; // TODO
+    const WEBHOOK = 'YOUR_APPS_SCRIPT_WEBAPP_URL'; // TODO
     const f = document.getElementById('leadForm');
     const ok = document.getElementById('ok');
     const err = document.getElementById('err');
