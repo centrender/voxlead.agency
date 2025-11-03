@@ -2,168 +2,136 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>VoxLead — AI Receptionist for Dental Clinics</title>
-  <meta name="description" content="Never miss a client again. Your AI Receptionist books for you 24/7 and brings back missed-call clients automatically." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VoxLead – AI Receptionist</title>
 
+  <!-- Minimal base styles; safe to keep or replace -->
   <style>
-    :root{
-      --bg:#0b0f14;--panel:#0e131a;--text:#e6f6ff;--muted:#9cb3c7;--brand:#0e5fff;
-      --good:#28f0b2;--ring:0 0 24px rgba(0,229,255,.25), inset 0 0 24px rgba(0,229,255,.15);
-      --glow:0 0 28px rgba(23,97,255,.35), inset 0 0 28px rgba(23,97,255,.12);
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;background:radial-gradient(1200px 800px at 20% -10%,#0b2d42 0%,transparent 45%),var(--bg);
-      color:var(--text);font:16px/1.5 Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1120px;margin:0 auto;padding:28px}
-    .nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-    .badge{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;
-      background:linear-gradient(180deg,#0b2a48, #0b2238);box-shadow:var(--glow);border:1px solid #113a63}
-    h1{font-size:56px;line-height:1.05;margin:22px 0 12px}
-    h2{font-size:34px;margin:0 0 18px}
-    p.lead{font-size:20px;color:var(--muted);margin:0 0 20px}
-    .card{
-      background:radial-gradient(140% 120% at 50% -10%,#0b2540 0%,#0c1722 55%,#0b121a 100%);
-      border:1px solid #12324d;border-radius:var(--radius);box-shadow:var(--glow)
-    }
-    .pad{padding:22px}
-    .cta{
-      display:inline-flex;align-items:center;justify-content:center;gap:12px;
-      padding:18px 26px;border-radius:999px;border:1px solid #194a8a;
-      background:linear-gradient(180deg,#0c2b52,#0b2242);box-shadow:var(--ring);font-weight:700
-    }
-    .cta--primary{background:linear-gradient(180deg,#0f6bff,#0e56cc);border-color:#1b5cff}
-    .list{padding-left:20px;margin:16px 0;color:#cfe2f3}
-    .list li{margin:8px 0}
-    .pill{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;border:1px dashed #1e506e;background:#0a1a28}
-    .phoneBlock{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-    .phone{font:800 22px/1 Inter;padding:14px 18px;border-radius:999px;background:#0a1a2c;border:1px solid #1a3d64;box-shadow:var(--ring)}
-    .form{display:grid;gap:12px}
-    .in{
-      width:100%;padding:16px;border-radius:12px;background:#0b131c;border:1px solid #14324d;color:var(--text)
-    }
-    .hint{color:#97bdff}
-    .ok{color:var(--good);margin-top:12px}
-    .err{color:#ff7b7b;margin-top:12px}
-    footer{color:#7f9db7;opacity:.9;margin:40px 0 12px}
-    @media(max-width:900px){h1{font-size:40px}.phone{font-size:18px}}
+    :root{--bg:#0b1320;--card:#0f1b2e;--text:#e6eefc;--muted:#9db0d1;--ok:#22c55e;--err:#ef4444;--brand:#1d4ed8;--brand2:#2563eb}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:var(--text);text-decoration:none}
+    .wrap{max-width:1000px;margin:0 auto;padding:24px}
+    .hero{padding:36px 0}
+    h1{font-size:32px;margin:0 0 10px} h2{font-size:24px;margin:28px 0 12px}
+    .card{background:linear-gradient(180deg,#0f1b2e,#0a1423);border:1px solid #152746;border-radius:16px;padding:20px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+    .row{display:grid;grid-template-columns:1fr;gap:14px}
+    input,textarea{width:100%;background:#0a1423;border:1px solid #20354f;color:var(--text);border-radius:10px;padding:14px 12px}
+    textarea{min-height:140px;resize:vertical}
+    .btn{display:inline-block;background:linear-gradient(180deg,var(--brand),var(--brand2));border:none;color:#fff;border-radius:16px;padding:16px 22px;font-weight:600;cursor:pointer}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+    .muted{color:var(--muted);font-size:14px}
+    .note{margin-top:10px;font-weight:600}
+    .grid2{display:grid;grid-template-columns:1fr;gap:16px}
+    @media (min-width:840px){.grid2{grid-template-columns:1fr 1fr}}
+    .box{background:linear-gradient(180deg,#0f1b2e,#0a1423);border:1px solid #1b2b45;border-radius:18px;padding:22px}
+    ul{margin:0 0 0 18px}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="nav">
-      <div class="badge"><strong>VoxLead</strong><span style="opacity:.8">AI Receptionist for Dental Clinics</span></div>
-      <a class="pill" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604">Get started — $499</a>
-    </div>
+    <section class="hero">
+      <h1>Never miss another call</h1>
+      <p class="muted">AI receptionist answers, qualifies, and books. You focus on growth.</p>
+    </section>
 
-    <!-- HERO -->
-    <section class="card pad" style="margin-top:18px">
-      <h1>Never miss a client again.</h1>
-      <h1>Your AI Receptionist books for you 24/7.</h1>
-      <p class="lead">Get back your missed-call clients from day one — no ads, no extra cost.</p>
-      <div class="phoneBlock card pad" style="background:#0b1420">
-        <div>
-          <div style="font-weight:700">Hear it in action</div>
-          <div class="hint">Say: “Book a cleaning next Tuesday morning.”</div>
+    <section class="grid2">
+      <!-- Offer -->
+      <div class="box">
+        <h2>$199 / month • Managed service</h2>
+        <ul>
+          <li>Capture and return every missed call</li>
+          <li>Book to your calendar automatically</li>
+          <li>Texts and follow-ups handled</li>
+          <li>No staff coordination needed</li>
+        </ul>
+        <div style="margin-top:16px">
+          <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604" target="_blank" rel="noopener">Start $499 setup</a>
+          <p class="muted" style="margin-top:8px">Setup once. Then $199/month after your trial.</p>
         </div>
-        <div class="phone">+1 (323) 870 9970</div>
-        <a class="cta" href="tel:+13238709970">Call the AI Receptionist</a>
       </div>
-      <div style="margin-top:20px;text-align:center">
-        <a class="cta cta--primary" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604">Start $499 Setup</a>
+
+      <!-- Lead form -->
+      <div class="card">
+        <h2>Free setup call</h2>
+        <p class="muted">Tell us hours, services, parking, and booking rules. We’ll provision a demo line and show bookings within 24 hours.</p>
+
+        <form id="leadForm" class="row" onsubmit="submitLead(event)" autocomplete="on">
+          <!-- honeypot -->
+          <input type="text" name="company_website" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0;padding:0;border:0" aria-hidden="true" />
+
+          <input id="name" name="name" placeholder="Your name" required />
+          <input id="email" name="email" type="email" inputmode="email" placeholder="Work email" required />
+          <input id="phone" name="phone" inputmode="tel" placeholder="Phone number" required />
+          <input id="business" name="business" placeholder="Business / Clinic" />
+          <textarea id="details" name="details" placeholder="Hours, services, booking rules, parking, special notes…"></textarea>
+
+          <button id="submitBtn" type="submit" class="btn">Submit</button>
+          <div id="submitNote" class="note muted"></div>
+        </form>
       </div>
     </section>
 
-    <!-- VALUE OFFER -->
-    <section class="card pad" style="margin-top:20px;text-align:center">
-      <h2>$199 / month • Managed service</h2>
-      <p class="lead" style="margin-top:-6px">Your first month included in the $499 setup.</p>
-      <ul class="list" style="max-width:760px;margin:16px auto 6px;text-align:left">
-        <li><b>Recover missed calls automatically</b> — turn missed calls into booked appointments.</li>
-        <li><b>Stay focused</b> — we handle all calls, reschedules, and confirmations 24/7.</li>
-        <li><b>Fewer no-shows</b> — automated reminders and instant reschedules.</li>
-        <li><b>No ads needed</b> — bring back clients you already paid to reach.</li>
-      </ul>
-      <div style="margin:18px 0 6px">
-        <a class="cta cta--primary" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604">Get Started</a>
-      </div>
-      <div class="hint" style="margin-top:8px">Simple pricing. Cancel anytime.</div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section style="margin-top:22px;display:grid;gap:14px">
-      <div class="card pad">
-        <div style="font-weight:700">“We stopped missing after-hours calls day one.”</div>
-        <div class="hint">— Beverly Smiles Dental, Beverly Hills, CA</div>
-      </div>
-      <div class="card pad">
-        <div style="font-weight:700">“Reschedules happen automatically. Calendar stays full.”</div>
-        <div class="hint">— Glendale Ortho, CA</div>
-      </div>
-      <div class="card pad">
-        <div style="font-weight:700">“Turning missed calls into bookings paid for itself.”</div>
-        <div class="hint">— Marina Dental, CA</div>
-      </div>
-    </section>
-
-    <!-- LEAD FORM -->
-    <section class="card pad" style="margin-top:22px">
-      <h2>Free setup call</h2>
-      <p class="lead">Tell us your hours, services, and how you want bookings handled. We'll provision a demo line and show results within 24 hours.</p>
-
-      <form id="leadForm" class="form" autocomplete="on">
-        <input class="in" name="name" placeholder="Your name" required />
-        <input class="in" name="email" type="email" placeholder="Work email" required />
-        <input class="in" name="phone" type="tel" inputmode="tel" placeholder="Phone number" required />
-        <input class="in" name="business" placeholder="Business / Clinic" required />
-        <textarea class="in" name="details" rows="4" placeholder="Hours, services, booking rules, parking, special notes…"></textarea>
-        <button class="cta cta--primary" type="submit" style="width:100%;justify-content:center">Submit</button>
-        <div id="msg" class="hint"></div>
-      </form>
-    </section>
-
-    <footer class="wrap" style="padding-left:0">
-      © 2025 VoxLead Agency • 9350 Wilshire Blvd, Beverly Hills • <a href="mailto:hello@voxlead.agency">hello@voxlead.agency</a>
+    <footer class="wrap" style="padding:32px 0 16px">
+      <p class="muted">© 2025 VoxLead Agency • hello@voxlead.agency</p>
     </footer>
   </div>
 
   <script>
-    // === CONFIG ===
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec";
-    const STRIPE_URL = "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604";
+    // —— CONFIG ——
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec';
+    // ——————————
 
-    const form = document.getElementById('leadForm');
-    const msg = document.getElementById('msg');
-
-    form.addEventListener('submit', async (e)=>{
+    async function submitLead(e){
       e.preventDefault();
-      msg.textContent = "Submitting...";
-      msg.className = "hint";
-      const data = new URLSearchParams(new FormData(form));
-      try{
-        const res = await fetch(GAS_URL,{
-          method:"POST",
-          headers:{"Content-Type":"application/x-www-form-urlencoded"},
-          body:data.toString()
+
+      const hp = document.getElementById('hp');
+      if (hp.value) return; // bot trap
+
+      const btn  = document.getElementById('submitBtn');
+      const note = document.getElementById('submitNote');
+      const form = document.getElementById('leadForm');
+
+      btn.disabled = true;
+      note.style.color = 'var(--muted)';
+      note.textContent = 'Submitting…';
+
+      const payload = {
+        name:     document.getElementById('name').value.trim(),
+        email:    document.getElementById('email').value.trim(),
+        phone:    document.getElementById('phone').value.trim(),
+        business: document.getElementById('business').value.trim(),
+        details:  document.getElementById('details').value.trim(),
+        source:   'website'
+      };
+
+      try {
+        const res  = await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         });
-        if(res.ok){
-          msg.textContent = "Thanks — we’ll reply within 1 business day.";
-          msg.className = "ok";
+
+        // Some Apps Script deployments return empty body; parse defensively.
+        const text = await res.text();
+        let data = {}; try { data = text ? JSON.parse(text) : {}; } catch {}
+
+        if (res.ok && (data.ok !== false)) {
+          note.style.color = 'var(--ok)';
+          note.textContent = 'Thanks — we’ll reply within 1 business day.';
           form.reset();
         } else {
-          throw new Error("Network error");
+          throw new Error(data.error || `HTTP ${res.status}`);
         }
-      }catch(err){
-        msg.textContent = "Submission failed. Email hello@voxlead.agency and we’ll assist.";
-        msg.className = "err";
+      } catch (err) {
+        console.error(err);
+        note.style.color = 'var(--err)';
+        note.textContent = 'Submission failed. Email hello@voxlead.agency and we’ll assist.';
+      } finally {
+        btn.disabled = false;
       }
-    });
+    }
   </script>
 </body>
 </html>
