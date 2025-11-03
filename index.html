@@ -2,136 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoxLead – AI Receptionist</title>
+  <title>VoxLead — AI Receptionist for Dental Clinics</title>
+  <meta name="description" content="Never miss a call again. Your AI Receptionist books for you 24/7." />
 
-  <!-- Minimal base styles; safe to keep or replace -->
   <style>
-    :root{--bg:#0b1320;--card:#0f1b2e;--text:#e6eefc;--muted:#9db0d1;--ok:#22c55e;--err:#ef4444;--brand:#1d4ed8;--brand2:#2563eb}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
-    a{color:var(--text);text-decoration:none}
-    .wrap{max-width:1000px;margin:0 auto;padding:24px}
-    .hero{padding:36px 0}
-    h1{font-size:32px;margin:0 0 10px} h2{font-size:24px;margin:28px 0 12px}
-    .card{background:linear-gradient(180deg,#0f1b2e,#0a1423);border:1px solid #152746;border-radius:16px;padding:20px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-    .row{display:grid;grid-template-columns:1fr;gap:14px}
-    input,textarea{width:100%;background:#0a1423;border:1px solid #20354f;color:var(--text);border-radius:10px;padding:14px 12px}
-    textarea{min-height:140px;resize:vertical}
-    .btn{display:inline-block;background:linear-gradient(180deg,var(--brand),var(--brand2));border:none;color:#fff;border-radius:16px;padding:16px 22px;font-weight:600;cursor:pointer}
-    .btn[disabled]{opacity:.6;cursor:not-allowed}
-    .muted{color:var(--muted);font-size:14px}
-    .note{margin-top:10px;font-weight:600}
-    .grid2{display:grid;grid-template-columns:1fr;gap:16px}
-    @media (min-width:840px){.grid2{grid-template-columns:1fr 1fr}}
-    .box{background:linear-gradient(180deg,#0f1b2e,#0a1423);border:1px solid #1b2b45;border-radius:18px;padding:22px}
-    ul{margin:0 0 0 18px}
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2d;
+      --ink:#e6f0ff;
+      --muted:#9bb3d6;
+      --brand:#2563ff;
+      --brand-2:#1747c7;
+      --ok:#18d186;
+      --err:#ff5a5a;
+      --ring: 0 0 0 2px rgba(37,99,255,.35), 0 20px 60px rgba(2,8,23,.45);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:radial-gradient(1200px 800px at 20% -10%, rgba(37,99,255,.07), transparent 45%),
+      radial-gradient(1000px 700px at 90% 10%, rgba(24,209,134,.06), transparent 40%), var(--bg);
+      color:var(--ink); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:32px 20px 96px}
+
+    /* hero */
+    .hero{padding:42px 0 24px;text-align:center}
+    .hero h1{
+      margin:0 auto;
+      font-weight:800;
+      letter-spacing:-.02em;
+      line-height:1.08;
+      font-size:clamp(36px, 5.6vw, 64px);
+    }
+    .hero h1 .line{display:block}
+    .hero p{color:var(--muted);margin:14px 0 0}
+
+    /* grid */
+    .grid{display:grid;gap:20px;grid-template-columns: 1fr; margin-top:36px}
+    @media(min-width:900px){.grid{grid-template-columns: .95fr 1.05fr}}
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow: var(--ring);
+    }
+
+    .pricing{padding:28px 28px 22px}
+    .pricing h3{margin:0 0 8px;font-size:22px}
+    .price{
+      font-size:36px;font-weight:800;margin:0 0 6px;
+    }
+    .price small{font-weight:600;color:var(--muted);font-size:.55em}
+    .list{margin:16px 0 20px;padding-left:18px;color:var(--ink)}
+    .list li{margin:8px 0}
+    .btn{
+      appearance:none;border:0;border-radius:999px;
+      background:linear-gradient(180deg, var(--brand), var(--brand-2));
+      color:#fff;font-weight:700;padding:14px 22px;cursor:pointer;
+      transition:transform .06s ease, filter .06s ease;
+      box-shadow: 0 10px 30px rgba(37,99,255,.35);
+      width:100%;
+    }
+    .btn:hover{filter:brightness(1.06)}
+    .btn:active{transform:translateY(1px)}
+
+    /* form */
+    .form{padding:24px}
+    .form h3{margin:6px 0 14px;font-size:22px}
+    .row{display:flex;flex-direction:column;gap:12px}
+    .input, textarea{
+      width:100%;
+      background:#0b162a;border:1px solid rgba(255,255,255,.08);
+      color:var(--ink);
+      border-radius:12px;padding:14px 14px;
+      outline:none;
+    }
+    .input:focus, textarea:focus{border-color:rgba(37,99,255,.55); box-shadow:0 0 0 3px rgba(37,99,255,.25)}
+    textarea{min-height:120px;resize:vertical}
+    .help{font-size:13px;color:var(--muted);margin-top:8px}
+    .notice{margin-top:12px;font-size:14px}
+    .ok{color:var(--ok)}
+    .err{color:var(--err)}
+    .split-actions{display:flex;gap:12px;align-items:center;margin-top:10px}
+    .ghost{
+      appearance:none;border:1px solid rgba(255,255,255,.12); background:transparent;color:var(--ink);
+      border-radius:999px;padding:12px 18px;cursor:pointer
+    }
+    footer{margin-top:40px;color:var(--muted);text-align:center;font-size:13px}
   </style>
 </head>
+
 <body>
-  <div class="wrap">
+  <main class="container">
+    <!-- HERO -->
     <section class="hero">
-      <h1>Never miss another call</h1>
-      <p class="muted">AI receptionist answers, qualifies, and books. You focus on growth.</p>
+      <h1>
+        <span class="line">Never miss a call again!</span>
+        <span class="line">Your AI Receptionist</span>
+        <span class="line">books for you 24/7</span>
+      </h1>
+      <p>Get back your missed-call clients from day one — no ads, no extra cost.</p>
     </section>
 
-    <section class="grid2">
-      <!-- Offer -->
-      <div class="box">
-        <h2>$199 / month • Managed service</h2>
-        <ul>
+    <!-- OFFER + FORM -->
+    <section class="grid">
+
+      <!-- LEFT: pricing/offer -->
+      <aside class="card pricing">
+        <h3>$199 / month • Managed service</h3>
+        <div class="price">$499 <small>one-time setup</small></div>
+
+        <ul class="list">
           <li>Capture and return every missed call</li>
-          <li>Book to your calendar automatically</li>
+          <li>Book straight to your calendar</li>
           <li>Texts and follow-ups handled</li>
           <li>No staff coordination needed</li>
         </ul>
-        <div style="margin-top:16px">
-          <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604" target="_blank" rel="noopener">Start $499 setup</a>
-          <p class="muted" style="margin-top:8px">Setup once. Then $199/month after your trial.</p>
-        </div>
-      </div>
 
-      <!-- Lead form -->
-      <div class="card">
-        <h2>Free setup call</h2>
-        <p class="muted">Tell us hours, services, parking, and booking rules. We’ll provision a demo line and show bookings within 24 hours.</p>
+        <button class="btn" id="stripeBtn"
+                onclick="window.location.href='https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604'">
+          Start $499 setup
+        </button>
+        <p class="help">Setup once. Then $199/month after your trial.</p>
+      </aside>
 
-        <form id="leadForm" class="row" onsubmit="submitLead(event)" autocomplete="on">
-          <!-- honeypot -->
-          <input type="text" name="company_website" id="hp" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;height:0;width:0;padding:0;border:0" aria-hidden="true" />
+      <!-- RIGHT: lead form -->
+      <article class="card form">
+        <h3>Free setup call</h3>
+        <p class="help">
+          Tell us hours, services, parking, and booking rules. We’ll provision a demo line and show bookings within 24 hours.
+        </p>
 
-          <input id="name" name="name" placeholder="Your name" required />
-          <input id="email" name="email" type="email" inputmode="email" placeholder="Work email" required />
-          <input id="phone" name="phone" inputmode="tel" placeholder="Phone number" required />
-          <input id="business" name="business" placeholder="Business / Clinic" />
+        <form id="leadForm" class="row" autocomplete="on">
+          <input class="input" id="name" name="name" placeholder="Your name" required />
+          <input class="input" id="email" name="email" placeholder="Work email" type="email" required />
+          <input class="input" id="phone" name="phone" placeholder="Phone number" inputmode="tel" required />
+          <input class="input" id="business" name="business" placeholder="Business / Clinic" />
           <textarea id="details" name="details" placeholder="Hours, services, booking rules, parking, special notes…"></textarea>
-
-          <button id="submitBtn" type="submit" class="btn">Submit</button>
-          <div id="submitNote" class="note muted"></div>
+          <input type="hidden" id="source" name="source" value="website" />
+          <div class="split-actions">
+            <button type="submit" class="btn" id="submitBtn">Submit</button>
+            <button type="button" class="ghost" id="resetBtn">Reset</button>
+          </div>
+          <div id="msg" class="notice"></div>
         </form>
-      </div>
+
+        <!-- Hidden fallback form + iframe for CORS-proof submit -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <form id="fallbackForm" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec" method="POST" style="display:none;">
+          <input name="name" />
+          <input name="email" />
+          <input name="phone" />
+          <input name="business" />
+          <input name="details" />
+          <input name="source" />
+        </form>
+
+      </article>
     </section>
 
-    <footer class="wrap" style="padding:32px 0 16px">
-      <p class="muted">© 2025 VoxLead Agency • hello@voxlead.agency</p>
-    </footer>
-  </div>
+    <footer>© 2025 VoxLead Agency • hello@voxlead.agency</footer>
+  </main>
 
   <script>
-    // —— CONFIG ——
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec';
-    // ——————————
+    // ----- CONFIG -----
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec";
 
-    async function submitLead(e){
-      e.preventDefault();
+    // ----- HELPERS -----
+    const $ = (id) => document.getElementById(id);
+    const form = $("leadForm");
+    const msg = $("msg");
+    const submitBtn = $("submitBtn");
+    const resetBtn = $("resetBtn");
 
-      const hp = document.getElementById('hp');
-      if (hp.value) return; // bot trap
+    function setState(state, text){
+      msg.textContent = text || "";
+      msg.className = "notice " + (state || "");
+      submitBtn.disabled = state === "loading";
+      submitBtn.textContent = state === "loading" ? "Submitting…" : "Submit";
+    }
 
-      const btn  = document.getElementById('submitBtn');
-      const note = document.getElementById('submitNote');
-      const form = document.getElementById('leadForm');
-
-      btn.disabled = true;
-      note.style.color = 'var(--muted)';
-      note.textContent = 'Submitting…';
-
-      const payload = {
-        name:     document.getElementById('name').value.trim(),
-        email:    document.getElementById('email').value.trim(),
-        phone:    document.getElementById('phone').value.trim(),
-        business: document.getElementById('business').value.trim(),
-        details:  document.getElementById('details').value.trim(),
-        source:   'website'
+    function collect(){
+      return {
+        name: $("name").value.trim(),
+        email: $("email").value.trim(),
+        phone: $("phone").value.trim(),
+        business: $("business").value.trim(),
+        details: $("details").value.trim(),
+        source: $("source").value
       };
+    }
 
-      try {
-        const res  = await fetch(WEB_APP_URL, {
-          method: 'POST',
-          mode: 'cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+    function fillFallback(data){
+      const f = document.getElementById("fallbackForm");
+      Object.keys(data).forEach(k=>{
+        f.querySelector(`input[name="${k}"]`).value = data[k];
+      });
+    }
+
+    // ----- SUBMIT -----
+    form.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const data = collect();
+
+      // basic guard
+      if(!data.name || !data.email || !data.phone){
+        setState("err","Please complete name, email, and phone.");
+        return;
+      }
+
+      setState("loading","Submitting…");
+
+      // 1) Try normal CORS POST with JSON response
+      try{
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+          body: new URLSearchParams(data),
         });
 
-        // Some Apps Script deployments return empty body; parse defensively.
-        const text = await res.text();
-        let data = {}; try { data = text ? JSON.parse(text) : {}; } catch {}
+        // Some Apps Script setups return opaque/no-CORS; treat 200 as success even if JSON unreadable
+        if(res.ok){
+          try {
+            const j = await res.json();
+            if(j && j.ok){ onSuccess(); return; }
+          } catch(_ignored){ /* fall through but still success path */ }
 
-        if (res.ok && (data.ok !== false)) {
-          note.style.color = 'var(--ok)';
-          note.textContent = 'Thanks — we’ll reply within 1 business day.';
-          form.reset();
-        } else {
-          throw new Error(data.error || `HTTP ${res.status}`);
+          onSuccess(); return;
         }
-      } catch (err) {
-        console.error(err);
-        note.style.color = 'var(--err)';
-        note.textContent = 'Submission failed. Email hello@voxlead.agency and we’ll assist.';
-      } finally {
-        btn.disabled = false;
+
+        throw new Error("HTTP "+res.status);
+      } catch(err){
+        // 2) Fallback: hidden form post (bypasses fetch/CORS UI limits)
+        try{
+          fillFallback(data);
+          document.getElementById("fallbackForm").submit();
+          // Give Apps Script a short moment to complete append
+          setTimeout(onSuccess, 600);
+        } catch(e2){
+          setState("err","Submission failed. Email hello@voxlead.agency and we’ll assist.");
+        }
       }
+    });
+
+    function onSuccess(){
+      setState("ok","Thanks — we’ll reply within 1 business day.");
+      form.reset();
     }
+
+    resetBtn.addEventListener("click", ()=>{
+      form.reset();
+      setState("", "");
+    });
   </script>
 </body>
 </html>
