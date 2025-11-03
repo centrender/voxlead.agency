@@ -158,29 +158,46 @@
     <div class="container">
       <h2 style="text-align:center;margin:0 0 10px">Free setup call</h2>
       <p class="muted" style="text-align:center;max-width:760px;margin:0 auto 16px">Tell us your hours, services, parking rules, and how you want bookings handled. We’ll provision a demo line and show bookings within 24 hours.</p>
-      <form id="leadForm" class="form card" autocomplete="on">
-        <input name="name" placeholder="Full name" required/>
-        <input name="email" placeholder="Work email" type="email" required/>
-        <input name="phone" placeholder="Mobile or office phone" inputmode="tel"/>
-        <input name="company" placeholder="Business / Practice name"/>
-        <textarea name="notes" rows="4" placeholder="What should your AI Receptionist say? Hours, services, insurance, parking, rules…"></textarea>
-        <button class="btn brand lg" type="submit">Submit</button>
-        <p id="ok" class="ok hidden">Thanks — we’ll reply within 1 business day.</p>
-        <p id="err" class="muted hidden">Submission failed. Email <a href="mailto:hello@voxlead.agency">hello@voxlead.agency</a> and we’ll assist.</p>
-      </form>
-    </div>
-  </section>
+     <!-- Free setup call -->
+<form id="lead-form"
+      action="https://script.google.com/macros/s/REPLACE_WITH_YOUR_EXEC_URL/exec"
+      method="POST"
+      target="hidden_iframe"
+      onsubmit="afterSubmit()"
+      class="stack gap-3">
 
-  <footer class="footer">
-    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div>© <span id="y"></span> VoxLead Agency — 9350 Wilshire Blvd, Beverly Hills</div>
-      <div class="center" style="gap:10px">
-        <a href="mailto:hello@voxlead.agency" class="muted">hello@voxlead.agency</a>
-      </div>
-    </div>
-  </footer>
+  <input type="text"   name="name"    placeholder="Your name"   required />
+  <input type="email"  name="email"   placeholder="Email"       required />
+  <input type="tel"    name="phone"   placeholder="Phone"       required />
+  <input type="text"   name="company" placeholder="Business / Clinic" />
+  <textarea            name="notes"   placeholder="Hours, services, parking, rules…"></textarea>
 
-  <script>
+  <!-- tag the source so you know it came from the site -->
+  <input type="hidden" name="source" value="voxlead.agency" />
+
+  <button id="lead-submit" type="submit" class="btn btn-primary btn-lg">Submit</button>
+  <p id="lead-msg" class="muted" style="display:none">Thanks — we’ll reply within 1 business day.</p>
+  <p id="lead-err" class="error"  style="display:none">Submission failed. Email hello@voxlead.agency and we’ll assist.</p>
+</form>
+
+<!-- swallow form navigation so the page doesn’t change -->
+<iframe name="hidden_iframe" style="display:none"></iframe>
+
+<script>
+  function afterSubmit(){
+    // optimistic UX: show success and disable button.
+    document.getElementById('lead-submit').disabled = true;
+    document.getElementById('lead-msg').style.display = 'block';
+    document.getElementById('lead-err').style.display = 'none';
+    // If you prefer to verify success, add a timer and poll your sheet via Apps Script later.
+  }
+
+  // Fix any leftover placeholders
+  document.querySelectorAll('a[href="YOUR_STRIPE_PAYMENT_LINK"]').forEach(a => {
+    a.href = 'https://buy.stripe.com/REPLACE_WITH_YOUR_LINK';
+  });
+</script>
+
     // ---- CONFIG: set these three values ----
     const STRIPE_LINK = 'https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604';
     const DEMO_NUMBER_DISPLAY = '+1 (323) 870 9970';
