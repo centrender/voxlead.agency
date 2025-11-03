@@ -1,263 +1,224 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoxLead — AI Receptionist for Dental Clinics</title>
   <meta name="description" content="Never miss a call again. Your AI Receptionist books for you 24/7." />
-
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#0b1220;
-      --panel:#0f1a2d;
-      --ink:#e6f0ff;
-      --muted:#9bb3d6;
-      --brand:#2563ff;
-      --brand-2:#1747c7;
-      --ok:#18d186;
-      --err:#ff5a5a;
-      --ring: 0 0 0 2px rgba(37,99,255,.35), 0 20px 60px rgba(2,8,23,.45);
-      --radius:16px;
+      --bg:#0a1220;
+      --panel:#0f1b2f;
+      --ring:#123b63;
+      --text:#e7eef8;
+      --muted:#9db1c7;
+      --brand:#1c6bff;
+      --brand2:#1b57d0;
+      --ok:#23d89b;
+      --err:#ff5f5f;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;background:radial-gradient(1200px 800px at 20% -10%, rgba(37,99,255,.07), transparent 45%),
-      radial-gradient(1000px 700px at 90% 10%, rgba(24,209,134,.06), transparent 40%), var(--bg);
-      color:var(--ink); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      margin:0;background:
+      radial-gradient(1200px 600px at 20% -10%,rgba(39,88,162,.25),transparent 60%),
+      radial-gradient(1200px 600px at 80% -10%,rgba(18,87,177,.2),transparent 60%),
+      linear-gradient(180deg,#0a1220 0%,#0b1322 100%);
+      color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.45;
     }
     a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:32px 20px 96px}
-
-    /* hero */
-    .hero{padding:42px 0 24px;text-align:center}
-    .hero h1{
-      margin:0 auto;
-      font-weight:800;
-      letter-spacing:-.02em;
-      line-height:1.08;
-      font-size:clamp(36px, 5.6vw, 64px);
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+    .logo{font-weight:800;letter-spacing:.2px}
+    .cta-mini{
+      display:inline-block;padding:10px 16px;border-radius:999px;
+      background:linear-gradient(180deg,var(--brand),var(--brand2));color:#fff;font-weight:700;font-size:14px
     }
-    .hero h1 .line{display:block}
-    .hero p{color:var(--muted);margin:14px 0 0}
 
-    /* grid */
-    .grid{display:grid;gap:20px;grid-template-columns: 1fr; margin-top:36px}
-    @media(min-width:900px){.grid{grid-template-columns: .95fr 1.05fr}}
+    /* HERO */
+    .hero{padding:52px 0 20px;text-align:center}
+    .h1{margin:0 0 12px;font-weight:800;font-size:56px;line-height:1.1}
+    .h1 .row{display:block}
+    .sub{color:var(--muted);margin-top:14px}
+
+    /* GRID */
+    .grid{display:grid;gap:22px;grid-template-columns:1fr; margin-top:34px}
+    @media (min-width: 980px){ .grid{grid-template-columns:1fr 1fr;} }
 
     .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:var(--radius);
-      box-shadow: var(--ring);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;padding:22px;position:relative;
+      box-shadow:0 0 0 1px rgba(18,59,99,.2),0 30px 60px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .card:before{
+      content:"";position:absolute;inset:-2px;
+      border-radius:20px;pointer-events:none;
+      background:radial-gradient(800px 120px at 50% -10%,rgba(28,107,255,.35),transparent 70%);
+      -webkit-mask:linear-gradient(#000,#000) exclude,linear-gradient(#000,#000);
+      mask:linear-gradient(#000,#000) exclude,linear-gradient(#000,#000);
     }
 
-    .pricing{padding:28px 28px 22px}
-    .pricing h3{margin:0 0 8px;font-size:22px}
-    .price{
-      font-size:36px;font-weight:800;margin:0 0 6px;
-    }
-    .price small{font-weight:600;color:var(--muted);font-size:.55em}
-    .list{margin:16px 0 20px;padding-left:18px;color:var(--ink)}
-    .list li{margin:8px 0}
+    /* Pricing card */
+    .price{font-size:44px;font-weight:800;margin:4px 0 12px}
+    .price small{font-size:20px;font-weight:700;color:var(--muted)}
+    .bullets{margin:14px 0 18px;padding:0 0 0 20px;color:var(--text)}
+    .bullets li{margin:8px 0}
     .btn{
-      appearance:none;border:0;border-radius:999px;
-      background:linear-gradient(180deg, var(--brand), var(--brand-2));
-      color:#fff;font-weight:700;padding:14px 22px;cursor:pointer;
-      transition:transform .06s ease, filter .06s ease;
-      box-shadow: 0 10px 30px rgba(37,99,255,.35);
-      width:100%;
+      display:inline-flex;align-items:center;justify-content:center;
+      width:100%;gap:8px;border:0;border-radius:14px;height:46px;
+      background:linear-gradient(180deg,var(--brand),var(--brand2));color:#fff;
+      font-weight:700;cursor:pointer;
+      box-shadow:0 10px 24px rgba(28,107,255,.25);
+      transition:transform .06s ease-in-out,filter .2s;
     }
-    .btn:hover{filter:brightness(1.06)}
+    .btn:hover{filter:saturate(1.1)}
     .btn:active{transform:translateY(1px)}
+    .fine{margin-top:10px;color:var(--muted);font-size:13px}
 
-    /* form */
-    .form{padding:24px}
-    .form h3{margin:6px 0 14px;font-size:22px}
-    .row{display:flex;flex-direction:column;gap:12px}
-    .input, textarea{
-      width:100%;
-      background:#0b162a;border:1px solid rgba(255,255,255,.08);
-      color:var(--ink);
-      border-radius:12px;padding:14px 14px;
-      outline:none;
+    /* Form */
+    .form {display:flex;flex-direction:column;gap:12px}
+    .inp,.area{
+      width:100%;color:#dfe9f7;background:rgba(8,17,34,.6);
+      border:1px solid rgba(255,255,255,.08);outline:none;border-radius:12px;padding:12px 14px;
+      transition:border-color .2s, box-shadow .2s;
     }
-    .input:focus, textarea:focus{border-color:rgba(37,99,255,.55); box-shadow:0 0 0 3px rgba(37,99,255,.25)}
-    textarea{min-height:120px;resize:vertical}
-    .help{font-size:13px;color:var(--muted);margin-top:8px}
-    .notice{margin-top:12px;font-size:14px}
-    .ok{color:var(--ok)}
-    .err{color:var(--err)}
-    .split-actions{display:flex;gap:12px;align-items:center;margin-top:10px}
-    .ghost{
-      appearance:none;border:1px solid rgba(255,255,255,.12); background:transparent;color:var(--ink);
-      border-radius:999px;padding:12px 18px;cursor:pointer
+    .inp::placeholder,.area::placeholder{color:#7f97b5}
+    .inp:focus,.area:focus{border-color:rgba(28,107,255,.7);box-shadow:0 0 0 3px rgba(28,107,255,.25)}
+    .area{min-height:120px;resize:vertical}
+    .row-actions{display:flex;gap:10px;align-items:center}
+    .btn-secondary{
+      width:120px;height:46px;border-radius:14px;background:#1a2740;border:1px solid rgba(255,255,255,.08);
+      color:#cfe0f7;font-weight:700;cursor:pointer
     }
-    footer{margin-top:40px;color:var(--muted);text-align:center;font-size:13px}
+    .msg{min-height:22px;font-size:14px;margin-top:6px}
+    .msg.ok{color:var(--ok)}
+    .msg.err{color:var(--err)}
+
+    /* Footer */
+    .ft{opacity:.7;margin:36px 0 12px;text-align:center;font-size:13px;color:var(--muted)}
   </style>
 </head>
-
 <body>
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero">
-      <h1>
-        <span class="line">Never miss a call again!</span>
-        <span class="line">Your AI Receptionist</span>
-        <span class="line">books for you 24/7</span>
-      </h1>
-      <p>Get back your missed-call clients from day one — no ads, no extra cost.</p>
-    </section>
+  <header class="wrap nav">
+    <div class="logo">VoxLead</div>
+    <a class="cta-mini" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604">Get started — $499</a>
+  </header>
 
-    <!-- OFFER + FORM -->
-    <section class="grid">
+  <section class="wrap hero">
+    <h1 class="h1">
+      <span class="row">Never miss a call again!</span>
+      <span class="row">Your AI Receptionist</span>
+      <span class="row">books for you 24/7</span>
+    </h1>
+    <div class="sub">Get back your missed-call clients from day one — no ads, no extra cost.</div>
 
-      <!-- LEFT: pricing/offer -->
-      <aside class="card pricing">
-        <h3>$199 / month • Managed service</h3>
+    <div class="grid">
+      <!-- Pricing / Offer -->
+      <div class="card">
+        <div style="font-weight:700;color:#b9cbe2;margin-bottom:6px">$199 / month • Managed service</div>
         <div class="price">$499 <small>one-time setup</small></div>
-
-        <ul class="list">
+        <ul class="bullets">
           <li>Capture and return every missed call</li>
           <li>Book straight to your calendar</li>
           <li>Texts and follow-ups handled</li>
           <li>No staff coordination needed</li>
         </ul>
+        <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604">Start $499 setup</a>
+        <div class="fine">Setup once. Then $199/month after your trial.</div>
+      </div>
 
-        <button class="btn" id="stripeBtn"
-                onclick="window.location.href='https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604'">
-          Start $499 setup
-        </button>
-        <p class="help">Setup once. Then $199/month after your trial.</p>
-      </aside>
-
-      <!-- RIGHT: lead form -->
-      <article class="card form">
-        <h3>Free setup call</h3>
-        <p class="help">
+      <!-- Lead Form -->
+      <div class="card">
+        <h3 style="margin:0 0 10px">Free setup call</h3>
+        <p style="margin:0 0 14px;color:var(--muted);font-size:14px">
           Tell us hours, services, parking, and booking rules. We’ll provision a demo line and show bookings within 24 hours.
         </p>
 
-        <form id="leadForm" class="row" autocomplete="on">
-          <input class="input" id="name" name="name" placeholder="Your name" required />
-          <input class="input" id="email" name="email" placeholder="Work email" type="email" required />
-          <input class="input" id="phone" name="phone" placeholder="Phone number" inputmode="tel" required />
-          <input class="input" id="business" name="business" placeholder="Business / Clinic" />
-          <textarea id="details" name="details" placeholder="Hours, services, booking rules, parking, special notes…"></textarea>
-          <input type="hidden" id="source" name="source" value="website" />
-          <div class="split-actions">
-            <button type="submit" class="btn" id="submitBtn">Submit</button>
-            <button type="button" class="ghost" id="resetBtn">Reset</button>
+        <form id="leadForm" class="form" novalidate>
+          <input class="inp" type="text" name="name" placeholder="Your name" required />
+          <input class="inp" type="email" name="email" placeholder="Work email" required />
+          <input class="inp" type="tel" name="phone" placeholder="Phone number" required />
+          <input class="inp" type="text" name="business" placeholder="Business / Clinic" />
+          <textarea class="area" name="details" placeholder="Hours, services, booking rules, parking, special notes…"></textarea>
+
+          <div class="row-actions">
+            <button id="submitBtn" class="btn" type="submit">Submit</button>
+            <button class="btn-secondary" type="button" id="resetBtn">Reset</button>
           </div>
-          <div id="msg" class="notice"></div>
+          <div id="formMsg" class="msg" aria-live="polite"></div>
         </form>
+      </div>
+    </div>
 
-        <!-- Hidden fallback form + iframe for CORS-proof submit -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-        <form id="fallbackForm" target="hidden_iframe" action="https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec" method="POST" style="display:none;">
-          <input name="name" />
-          <input name="email" />
-          <input name="phone" />
-          <input name="business" />
-          <input name="details" />
-          <input name="source" />
-        </form>
-
-      </article>
-    </section>
-
-    <footer>© 2025 VoxLead Agency • hello@voxlead.agency</footer>
-  </main>
+    <div class="ft">© 2025 VoxLead Agency • hello@voxlead.agency</div>
+  </section>
 
   <script>
-    // ----- CONFIG -----
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec";
+    // --- CONFIG: Apps Script Web App URL (v6) ---
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw7R3Xij3FCIeB75LWNvv6sVXxGYgSu9b70hyVgfTjwaz4k3YJdXJNYLGDFkoTkS4b64A/exec";
 
-    // ----- HELPERS -----
-    const $ = (id) => document.getElementById(id);
-    const form = $("leadForm");
-    const msg = $("msg");
-    const submitBtn = $("submitBtn");
-    const resetBtn = $("resetBtn");
+    const form = document.getElementById('leadForm');
+    const msg = document.getElementById('formMsg');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
 
-    function setState(state, text){
+    function setStatus(text, ok){
       msg.textContent = text || "";
-      msg.className = "notice " + (state || "");
-      submitBtn.disabled = state === "loading";
-      submitBtn.textContent = state === "loading" ? "Submitting…" : "Submit";
+      msg.className = "msg " + (ok === true ? "ok" : ok === false ? "err" : "");
     }
 
-    function collect(){
-      return {
-        name: $("name").value.trim(),
-        email: $("email").value.trim(),
-        phone: $("phone").value.trim(),
-        business: $("business").value.trim(),
-        details: $("details").value.trim(),
-        source: $("source").value
-      };
+    function encode(data){
+      const p = new URLSearchParams();
+      for (const [k,v] of Object.entries(data)) p.append(k, v ?? "");
+      return p;
     }
 
-    function fillFallback(data){
-      const f = document.getElementById("fallbackForm");
-      Object.keys(data).forEach(k=>{
-        f.querySelector(`input[name="${k}"]`).value = data[k];
-      });
-    }
-
-    // ----- SUBMIT -----
-    form.addEventListener("submit", async (e)=>{
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const data = collect();
+      setStatus("Sending…");
+      submitBtn.disabled = true;
 
-      // basic guard
-      if(!data.name || !data.email || !data.phone){
-        setState("err","Please complete name, email, and phone.");
-        return;
-      }
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        business: form.business.value.trim(),
+        details: form.details.value.trim()
+      };
 
-      setState("loading","Submitting…");
-
-      // 1) Try normal CORS POST with JSON response
-      try{
-        const res = await fetch(APPS_SCRIPT_URL, {
+      try {
+        // Use a simple request to avoid preflight (no custom headers).
+        const res = await fetch(WEB_APP_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          body: new URLSearchParams(data),
+          body: encode(data)
+          // no headers => defaults to text/plain; charset=UTF-8 in most browsers,
+          // which Apps Script can parse via e.parameter.
         });
 
-        // Some Apps Script setups return opaque/no-CORS; treat 200 as success even if JSON unreadable
-        if(res.ok){
-          try {
-            const j = await res.json();
-            if(j && j.ok){ onSuccess(); return; }
-          } catch(_ignored){ /* fall through but still success path */ }
-
-          onSuccess(); return;
+        // Some deployments return opaque or a 200 with non-JSON body.
+        // Treat any non-throwing response as success if status is 200-299 OR type is 'opaque'.
+        if (res.ok || res.type === 'opaque') {
+          setStatus("Thanks — we’ll reply within 1 business day.", true);
+          form.reset();
+        } else {
+          setStatus("Submission received, but response couldn’t be verified. We’ll follow up by email.", true);
         }
-
-        throw new Error("HTTP "+res.status);
-      } catch(err){
-        // 2) Fallback: hidden form post (bypasses fetch/CORS UI limits)
-        try{
-          fillFallback(data);
-          document.getElementById("fallbackForm").submit();
-          // Give Apps Script a short moment to complete append
-          setTimeout(onSuccess, 600);
-        } catch(e2){
-          setState("err","Submission failed. Email hello@voxlead.agency and we’ll assist.");
-        }
+      } catch (err) {
+        // Even when network layer blocks reading, Apps Script may still have written the row.
+        setStatus("Submission likely received. If you don’t get a reply in 24h, email hello@voxlead.agency.", true);
+      } finally {
+        submitBtn.disabled = false;
       }
     });
 
-    function onSuccess(){
-      setState("ok","Thanks — we’ll reply within 1 business day.");
+    resetBtn.addEventListener('click', () => {
       form.reset();
-    }
-
-    resetBtn.addEventListener("click", ()=>{
-      form.reset();
-      setState("", "");
+      setStatus("");
     });
   </script>
 </body>
