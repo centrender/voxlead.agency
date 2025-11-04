@@ -58,7 +58,11 @@
       display:flex; align-items:center; justify-content:space-between; gap:14px;
       padding:16px; border:1px dashed #29416a; border-radius:999px; background:linear-gradient(180deg,#0b1220,#0a111d);
     }
-    .num{font-weight:800; font-size:18px; padding:10px 16px; border-radius:999px; background:#0c1d39; box-shadow:inset 0 0 18px rgba(14,95,255,.2)}
+    .num{
+      font-weight:800; font-size:18px; padding:10px 16px; border-radius:999px;
+      background:#0c1d39; box-shadow:inset 0 0 18px rgba(14,95,255,.2);
+      white-space:nowrap; /* keep phone on one line */
+    }
     /* testimonials */
     .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
     .t{padding:18px; border-radius:var(--radius); background:linear-gradient(180deg,#0c1424,#0a111d); border:1px solid #1c2a46}
@@ -146,15 +150,15 @@
     <section class="section">
       <div class="grid">
         <div class="t">
-          <div style="font-size:18px; font-weight:700">“We started getting missed-call clients back day one.”</div>
+          <div style="font-size:18px; font-weight:700">“We started earning more from day one.”</div>
           <small>— Beverly Smiles Dental, Beverly Hills, CA</small>
         </div>
         <div class="t">
-          <div style="font-size:18px; font-weight:700">“Reschedules happen without staff. Calendar stays clean.”</div>
+          <div style="font-size:18px; font-weight:700">“Appointments set without staff. Calendar stays clean and full.”</div>
           <small>— Glendale Ortho, CA</small>
         </div>
         <div class="t">
-          <div style="font-size:18px; font-weight:700">“Setup was fast. Script sounds on-brand.”</div>
+          <div style="font-size:18px; font-weight:700">“Setup was quick. AI Receptionist sounds on-brand.”</div>
           <small>— Marina Dental, CA</small>
         </div>
       </div>
@@ -175,6 +179,7 @@
         <button class="btn" type="submit" id="submitBtn">Submit</button>
         <div id="formMsg" class="msg" aria-live="polite"></div>
       </form>
+      <div class="msg ok" style="text-align:center; margin-top:10px;">Thanks — we’ll reply within 1 business day.</div>
     </section>
 
     <footer class="wrap" style="padding-left:0;padding-right:0">
