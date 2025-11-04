@@ -4,228 +4,145 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoxLead — AI Receptionist for Dental Clinics</title>
-  <meta name="description" content="Never miss a call again. VoxLead AI Receptionist books for you 24/7. $499 setup covers your first month. $199/mo starts month two." />
+  <meta name="description" content="Never miss a call again. VoxLead AI Receptionist books for you 24/7. $499 covers setup and your first month. After installation, $199/mo starts in month two." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#0b0f14; --panel:#0e131a; --ink:#e6f2ff; --muted:#9cb3d1; --brand:#0e5fff;
-      --accent:#38ffbf; --ring:0 0 24px rgba(0,229,255,.25), inset 0 0 24px rgba(0,229,255,.1);
-      --glow:0 0 28px rgba(56,255,191,.25), inset 0 0 28px rgba(56,255,191,.15);
-      --radius:18px;
+      --accent:#38fff3; --pill:#0a1b3a; --glow:rgba(14,95,255,.35);
+      --success:#22c55e; --danger:#ef4444;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      background:radial-gradient(1200px 600px at 50% -20%, #0e1930 0%, transparent 60%), var(--bg);
-      color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-    }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1080px; margin:0 auto; padding:24px}
-    header{display:flex; align-items:center; gap:14px; padding:8px 0 20px}
-    .logo{display:inline-flex; align-items:center; gap:10px; padding:8px 14px; border-radius:999px; background:linear-gradient(180deg,#0c1220,#0b1320); box-shadow:var(--ring)}
-    .logo b{font-weight:800; letter-spacing:.2px}
-    .tag{color:var(--muted)}
-    /* hero */
-    .hero{padding:28px 8px 8px; text-align:center}
-    .hero h1{font-size:46px; line-height:1.05; margin:12px auto 10px; max-width:820px}
-    .hero p{color:var(--muted); font-size:18px; margin:0 auto 26px; max-width:760px}
-    .ctaRow{display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px; cursor:pointer;
-      padding:18px 26px; border-radius:999px; border:1px solid #254a86; background:linear-gradient(180deg,#0e2b55,#0c1e3c);
-      color:#e9f3ff; font-weight:700; font-size:18px; min-width:260px; box-shadow:var(--ring); transition:transform .06s ease;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.alt{background:linear-gradient(180deg,#0d1628,#0b1220); border-color:#283650}
-    .pill{display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border:1px dashed #2a426a; border-radius:999px; color:var(--muted)}
-    /* centered offer card */
-    .offer{
-      margin:48px auto 18px; max-width:760px; padding:26px 22px; border-radius:var(--radius);
-      background:linear-gradient(180deg,#0d1626,#0b121f); border:1px solid #1f3050; box-shadow:var(--glow);
-      text-align:center;
-    }
-    .price{font-size:38px; font-weight:800}
-    .subtitle{color:var(--muted); margin:8px 0 4px}
-    .bullets{display:grid; grid-template-columns:1fr; gap:8px; margin:14px auto 0; max-width:620px; color:#cfe1ff}
-    .bullets li{list-style:none}
-    /* demo */
-    .section{margin:64px auto 0; padding:0 8px}
-    .cards{display:grid; gap:14px}
-    .card{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:16px; border:1px dashed #29416a; border-radius:999px; background:linear-gradient(180deg,#0b1220,#0a111d);
-    }
-    .num{font-weight:800; font-size:18px; padding:10px 16px; border-radius:999px; background:#0c1d39; box-shadow:inset 0 0 18px rgba(14,95,255,.2)}
-    /* testimonials */
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-    .t{padding:18px; border-radius:var(--radius); background:linear-gradient(180deg,#0c1424,#0a111d); border:1px solid #1c2a46}
-    .t small{color:var(--muted)}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#091018 0%,#0b1017 100%);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--ink);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--glow);box-shadow:0 0 20px var(--glow)}
+    .nav a.cta{padding:8px 14px;border-radius:999px;background:rgba(14,95,255,.12);border:1px solid rgba(14,95,255,.4)}
+    .hero{padding:72px 0 28px;text-align:center}
+    .hero h1{font-size:48px;line-height:1.1;margin:0 0 18px}
+    .hero p.sub{color:var(--muted);margin:0 auto 26px;max-width:720px}
+    .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .btn{padding:14px 20px;border-radius:999px;background:rgba(14,95,255,.15);border:1px solid rgba(14,95,255,.5);color:var(--ink);font-weight:600}
+    .btn.secondary{background:rgba(56,255,243,.08);border-color:rgba(56,255,243,.35)}
+    .section{padding:42px 0}
+    .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:28px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+    .pricing{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:900px){.pricing{grid-template-columns:1fr 1fr}}
+    .price-title{font-size:32px;font-weight:800;margin:0 0 10px}
+    .price-note{color:var(--muted);margin:0 0 16px}
+    .ul{margin:0;padding-left:18px;color:var(--ink)}
+    .ul li{margin:8px 0}
+    .demo{margin-top:10px}
+    .demo-row{display:flex;align-items:center;gap:18px;justify-content:space-between;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.14);padding:16px 18px;border-radius:999px}
+    .demo-left{display:flex;flex-direction:column;gap:4px}
+    .caption{font-weight:700}
+    .helper{color:var(--muted);font-size:14px}
+    .pill{padding:10px 16px;border-radius:999px;background:linear-gradient(180deg,#0a1b3a 0%, #0b1631 100%);border:1px solid rgba(14,95,255,.55);box-shadow:0 0 30px var(--glow);font-weight:800}
+    .ghost{padding:10px 18px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,.22);font-weight:700}
+    .h3{font-size:22px;margin:0 0 14px;text-align:center}
     /* form */
-    .formWrap{max-width:760px; margin:10px auto 90px; padding:18px; border-radius:var(--radius); background:linear-gradient(180deg,#0c1424,#0a111d); border:1px solid #1c2a46}
-    .formWrap h2{text-align:center; margin:8px 0 6px}
-    .hint{text-align:center; color:var(--muted); margin:0 0 16px}
-    .row{display:flex; flex-direction:column; gap:12px}
-    input, textarea{
-      width:100%; padding:14px 15px; border-radius:12px; border:1px solid #243a60; outline:none; background:#0b1220; color:#e6f2ff;
-    }
-    textarea{min-height:110px; resize:vertical}
-    .msg{margin-top:10px; text-align:center; font-weight:600}
-    .ok{color:#62ffcc} .err{color:#ff7b7b}
-    footer{border-top:1px solid #16243d; color:#7690b2; padding:18px 0; font-size:14px}
-    @media (max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .hero h1{font-size:34px}
-      .btn{width:100%}
-      .card{flex-direction:column; align-items:flex-start}
-    }
+    .form .row{display:flex;flex-direction:column;gap:14px}
+    .input, .textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0b1118;color:var(--ink)}
+    .textarea{min-height:120px;resize:vertical}
+    .submit{margin-top:16px;width:100%;padding:16px;border-radius:999px;border:1px solid rgba(14,95,255,.5);background:rgba(14,95,255,.18);color:var(--ink);font-weight:800}
+    .center{text-align:center}
+    .mt-8{margin-top:32px}
   </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <!-- Header -->
-    <header>
-      <a class="logo" href="#demo"><b>VoxLead</b></a>
-      <div class="tag">AI Receptionist for Dental Clinics — <u>Try now</u></div>
-    </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <h1>Never miss a call again. Your AI Receptionist books for you 24/7.</h1>
-      <p><span class="pill">$499 today covers setup and your first month.</span> After installation, <b>$199/mo</b> starts month two.</p>
-      <div class="ctaRow">
-        <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604" target="_blank" rel="noopener">Get started — $499</a>
-        <a class="btn alt" href="#demo">Hear it in action</a>
+  <!-- NAV -->
+  <header class="wrap nav">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>VoxLead</span>
+    </div>
+    <nav>
+      <!-- anchor FIX: make “Try now” scroll to #demo -->
+      <a class="cta" href="#demo">AI Receptionist for Dental Clinics — <u>Try now</u></a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="wrap hero" id="top">
+    <h1>
+      Never miss a call again<br>
+      Your AI Receptionist<br>
+      books your clients 24/7
+    </h1>
+    <p class="sub center">
+      $499 covers setup and your first month. After installation, $199/mo starts in month two.
+    </p>
+    <div class="btns">
+      <a class="btn" href="#setup">Get started — $499</a>
+      <a class="btn secondary" href="#demo">Try Your AI Receptionist now</a>
+    </div>
+  </section>
+
+  <!-- PRICING / VALUE -->
+  <section class="wrap section">
+    <div class="pricing">
+      <div class="card">
+        <h2 class="price-title">$199 / month • Managed service</h2>
+        <p class="price-note">+ One-time setup fee $499 to provision your AI Receptionist</p>
+
+        <!-- VALUE-FOCUSED BULLETS (no tech jargon) -->
+        <ul class="ul">
+          <li><strong>No missed calls → no lost clients</strong></li>
+          <li><strong>24/7 booking and call handling</strong></li>
+          <li><strong>Set up once, we manage everything</strong></li>
+          <li><strong>Pays for itself from day one</strong></li>
+          <li><strong>Never sick, never late, never on break</strong></li>
+        </ul>
+
+        <div class="btns" style="justify-content:flex-start;margin-top:16px">
+          <a class="btn" href="#setup">Start $499 setup</a>
+        </div>
       </div>
-    </section>
 
-    <!-- Centered Offer Card -->
-    <div class="offer">
-      <div class="price">$199 <span class="subtitle">/ month • Managed service</span></div>
-      <div class="subtitle">+ One-time setup fee <b>$499</b> to provision your AI Receptionist</div>
-      <ul class="bullets">
-        <li>Twilio number provisioning and AI voice agent</li>
-        <li>Prompt + call-flow design, booking and SMS wiring</li>
-        <li>Ongoing tuning, routing and failover monitoring</li>
-        <li>Monthly performance report to Google Sheets</li>
-        <li>Priority support and break/fix</li>
-      </ul>
-      <div class="ctaRow" style="margin-top:18px">
-        <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604" target="_blank" rel="noopener">Start $499 setup</a>
+      <!-- Setup form card kept as-is -->
+      <div id="setup" class="card form">
+        <h3 class="h3">Free setup call</h3>
+        <p class="price-note center">Tell us hours, services, parking rules, and how you want bookings handled. We’ll provision a demo line and show bookings within 24 hours.</p>
+        <form method="post" action="/submit">
+          <div class="row">
+            <input class="input" type="text" name="name" placeholder="Your name" required>
+            <input class="input" type="email" name="email" placeholder="Email" required>
+            <input class="input" type="tel" name="phone" placeholder="Phone" required>
+            <input class="input" type="text" name="business" placeholder="Business / clinic" required>
+            <textarea class="textarea" name="instructions" placeholder="What should your AI Receptionist say? Hours, services, parking, rules…"></textarea>
+          </div>
+          <button class="submit" type="submit">Submit</button>
+        </form>
       </div>
     </div>
+  </section>
 
-    <!-- Demo numbers -->
-    <section id="demo" class="section">
-      <h2 style="text-align:center">Hear it in action</h2>
-      <div class="cards">
-        <div class="card">
-          <div>
-            <div style="font-weight:700">Dental receptionist demo</div>
-            <div class="tag">Try: “Book a cleaning next Tuesday morning.”</div>
-          </div>
-          <a class="num" href="tel:+13238709970">+1 (323) 870 9970</a>
-          <a class="btn alt" href="tel:+13238709970">Call</a>
-        </div>
-        <div class="card">
-          <div>
-            <div style="font-weight:700">Talk with the AI Receptionist live</div>
-            <div class="tag">Ask hours, services, or try a reschedule.</div>
-          </div>
-          <a class="num" href="tel:+13238709970">+1 (323) 870 9970</a>
-          <a class="btn alt" href="tel:+13238709970">Call now</a>
-        </div>
+  <!-- DEMO (merged into single row) -->
+  <section class="wrap section demo" id="demo">
+    <h3 class="h3">Try Your AI Receptionist now</h3>
+
+    <div class="demo-row">
+      <div class="demo-left">
+        <span class="caption">Live demo</span>
+        <span class="helper">Say: “Book a cleaning next Tuesday morning,” ask hours, services, or try a reschedule.</span>
       </div>
-    </section>
+      <div class="pill">+1 (323) 870 9970</div>
+      <a class="ghost" href="tel:+13238709970">Call now</a>
+    </div>
+  </section>
 
-    <!-- Proof / pains -->
-    <section class="section">
-      <div class="grid">
-        <div class="t">
-          <div style="font-size:18px; font-weight:700">“We started getting missed-call clients back day one.”</div>
-          <small>— Beverly Smiles Dental, Beverly Hills, CA</small>
-        </div>
-        <div class="t">
-          <div style="font-size:18px; font-weight:700">“Reschedules happen without staff. Calendar stays clean.”</div>
-          <small>— Glendale Ortho, CA</small>
-        </div>
-        <div class="t">
-          <div style="font-size:18px; font-weight:700">“Setup was fast. Script sounds on-brand.”</div>
-          <small>— Marina Dental, CA</small>
-        </div>
-      </div>
-    </section>
-
-    <!-- Form -->
-    <section class="formWrap" id="setup">
-      <h2>Free setup call</h2>
-      <p class="hint">Tell us hours, services, parking rules, and how you want bookings handled. We’ll provision a demo line and show bookings within 24 hours.</p>
-
-      <form id="lead-form" class="row" autocomplete="on">
-        <input name="name" type="text" placeholder="Your name" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="phone" type="tel" placeholder="Phone" required />
-        <input name="business" type="text" placeholder="Business / clinic" required />
-        <textarea name="details" placeholder="What should your AI Receptionist say? Hours, services, parking, rules…"></textarea>
-
-        <button class="btn" type="submit" id="submitBtn">Submit</button>
-        <div id="formMsg" class="msg" aria-live="polite"></div>
-      </form>
-    </section>
-
-    <footer class="wrap" style="padding-left:0;padding-right:0">
-      © 2025 VoxLead Agency • 9350 Wilshire Blvd, Beverly Hills • <a href="mailto:hello@voxlead.agency">hello@voxlead.agency</a>
-    </footer>
-  </div>
+  <footer class="wrap section center" style="color:var(--muted)">
+    © <span id="y"></span> VoxLead. All rights reserved.
+  </footer>
 
   <script>
-    // === CONFIG: endpoints ===
-    const APPS_SCRIPT_WEBAPP = "https://script.google.com/macros/s/AKfycbxowdnfrN_pBAxzTfDpHL6nSLmWqpASaahL17cd8CNChHPruuz6ipNVLrp5E7HFfIe9ZQ/exec";
-    const STRIPE_LINK = "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604";
-
-    // Form submission: use x-www-form-urlencoded to avoid CORS preflight
-    const form = document.getElementById('lead-form');
-    const msg  = document.getElementById('formMsg');
-    const btn  = document.getElementById('submitBtn');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      msg.textContent = "";
-      btn.disabled = true; btn.textContent = "Submitting…";
-
-      const data = new URLSearchParams(new FormData(form)); // name, email, phone, business, details
-
-      try {
-        const res = await fetch(APPS_SCRIPT_WEBAPP, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: data
-        });
-
-        // Apps Script often returns opaque on no-cors; treat 200/opaque as success if no exception
-        if (!res || (res.status && res.status >= 400)) throw new Error('Bad response');
-
-        form.reset();
-        msg.className = "msg ok";
-        msg.textContent = "Thanks — we’ll reply within 1 business day.";
-      } catch (err) {
-        msg.className = "msg err";
-        msg.textContent = "Submission failed. Email hello@voxlead.agency and we’ll assist.";
-      } finally {
-        btn.disabled = false; btn.textContent = "Submit";
-      }
-    });
-
-    // Make every “Get started” click use Stripe
-    for (const a of document.querySelectorAll('a[href="#pay"], .pay')) {
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open(STRIPE_LINK, '_blank', 'noopener');
-      });
-    }
+    // year
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
