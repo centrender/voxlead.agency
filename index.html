@@ -250,14 +250,85 @@
   <script>
     // ======= CONFIG =======
     // PUT YOUR URLS HERE:
-    const BOOKING_URL = "https://calendar.app.google/Ja4idHw1JVJf7cwZA";
-    const STRIPE_CHECKOUT_URL = ""; // "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604"
-    const APP_SCRIPT_URL = ""; // "https://script.google.com/macros/s/AKfycbxLfL22DBWiGMacUiEraPkAn-PlYyDfr_l3ndRrxDnOe5GCgTnm9cLM0X5xY4J8Ya6-yA/exec"
+    const BOOKING_URL = "https://calendar.app.google/Ja4idHw1JVJf7cwZA"; // Google Calendar booking link
+    const STRIPE_CHECKOUT_URL = ""; // e.g. "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604"
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec"; // your working Apps Script URL
 
     // Optional niche demo clips (mp4). You can leave blank safely.
     const DEMO_VIDEOS = {
       dentist: "", medspa: "", chiro: "", auto: ""
     };
+
+    // ======= BOOKING EMBED FIX (Calendly OR Google) =======
+    (function initBooking(){
+      const el = document.getElementById("bookingInline");
+      const fb = document.getElementById("bookingFallback");
+
+      if (!BOOKING_URL) {
+        el.innerHTML = `
+          <div style="padding:18px">
+            <p class="help">Scheduling link not configured yet. You can still reach us:</p>
+            <div class="cta-row">
+              <a class="btn primary" href="tel:3103416442">Call 310-341-6442</a>
+              <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
+            </div>
+          </div>`;
+        return;
+      }
+
+      const url = BOOKING_URL;
+
+      // If Calendly URL → use inline widget
+      if (/calendly\.com/i.test(url)) {
+        const tryInit = setInterval(()=>{
+          if (window.Calendly) {
+            clearInterval(tryInit);
+            try {
+              window.Calendly.initInlineWidget({ url, parentElement: el });
+            } catch {
+              fb.textContent = "Calendly couldn’t load. Open in a new tab: " + url;
+              fb.classList.remove("hidden");
+            }
+          }
+        }, 400);
+        setTimeout(()=>clearInterval(tryInit), 8000);
+        return;
+      }
+
+      // If Google Appointment Schedule → try iframe (supports both calendar.google.com and calendar.app.google)
+      if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
+        const iframe = document.createElement("iframe");
+        iframe.className = "booking";
+        iframe.src = url;
+        iframe.referrerPolicy = "no-referrer-when-downgrade";
+        iframe.loading = "lazy";
+        iframe.onload = ()=>console.log("Google booking embedded");
+        iframe.onerror = ()=>showLinkFallback();
+        try { el.appendChild(iframe); } catch (_) { showLinkFallback(); }
+
+        function showLinkFallback(){
+          el.innerHTML = `
+            <div style="padding:18px">
+              <p class="help">Open the booking page in a new tab:</p>
+              <div class="cta-row">
+                <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
+                <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
+              </div>
+            </div>`;
+        }
+        return;
+      }
+
+      // Unknown scheduler → provide a simple fallback link
+      el.innerHTML = `
+        <div style="padding:18px">
+          <div class="cta-row">
+            <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
+            <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
+          </div>
+        </div>`;
+    })();
+  </script>
 
     // ======= HELPERS =======
     const $ = (sel, ctx=document)=>ctx.querySelector(sel);
