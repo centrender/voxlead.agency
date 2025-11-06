@@ -3,290 +3,428 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoxLead — AI Receptionist for Dental Clinics</title>
-  <meta name="description" content="Never miss a call again. VoxLead AI Receptionist books for you 24/7. $499 setup covers your first month. $199/mo starts month two." />
+
+  <title>VoxLead — AI Growth System for Local Clinics</title>
+  <meta name="description" content="Double appointments without extra staff. The AI Growth System answers instantly, books 24/7, and never misses a patient." />
+  <meta name="theme-color" content="#0e5fff" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b0f14; --panel:#0e131a; --ink:#e6f2ff; --muted:#9cb3d1; --brand:#0e5fff;
-      --accent:#38ffbf; --ring:0 0 24px rgba(0,229,255,.25), inset 0 0 24px rgba(0,229,255,.1);
-      --glow:0 0 28px rgba(56,255,191,.25), inset 0 0 28px rgba(56,255,191,.15);
-      --radius:18px;
+      --bg:#0b0f14; --panel:#0e131a; --ink:#e6f2ff; --muted:#9cb3d1; --brand:#0e5fff; --accent:#38ffa6;
+      --ok:#12b886; --warn:#ffd43b; --err:#ff6b6b; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px; --radius-lg:22px; --radius-xl:28px;
+      --max:1180px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-      background:radial-gradient(1200px 600px at 50% -20%, #0e1930 0%, transparent 60%), var(--bg);
-      color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink); background:radial-gradient(1200px 800px at 80% -10%,#112033 0%,#0b0f14 50%,#0b0f14 100%) fixed;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1080px; margin:0 auto; padding:24px}
-    header{display:flex; align-items:center; gap:14px; padding:8px 0 20px}
-    .logo{display:inline-flex; align-items:center; gap:10px; padding:8px 14px; border-radius:999px; background:linear-gradient(180deg,#0c1220,#0b1320); box-shadow:var(--ring)}
-    .logo b{font-weight:800; letter-spacing:.2px}
-    .tag{color:var(--muted)}
-    /* hero */
-    .hero{padding:28px 8px 8px; text-align:center}
-    .hero h1{font-size:46px; line-height:1.05; margin:12px auto 10px; max-width:820px}
-    .hero p{color:var(--muted); font-size:18px; margin:0 auto 26px; max-width:760px}
-    .ctaRow{display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
+    a{color:var(--ink); text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(120%) blur(8px); background:rgba(11,15,20,.55); border-bottom:1px solid rgba(230,242,255,.06)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .logo{width:34px; height:34px; border-radius:12px; background:linear-gradient(135deg,var(--brand),#6aa8ff); box-shadow:0 8px 18px rgba(14,95,255,.35)}
+    .nav a.btn{margin-left:10px}
     .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px; cursor:pointer;
-      padding:18px 26px; border-radius:999px; border:1px solid #254a86; background:linear-gradient(180deg,#0e2b55,#0c1e3c);
-      color:#e9f3ff; font-weight:700; font-size:18px; min-width:260px; box-shadow:var(--ring); transition:transform .06s ease;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid rgba(230,242,255,.12);
+      padding:12px 16px; border-radius:14px; color:var(--ink); background:rgba(14,19,26,.6); box-shadow:var(--shadow); cursor:pointer;
+      transition:.2s ease all; font-weight:600;
     }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.alt{background:linear-gradient(180deg,#0d1628,#0b1220); border-color:#283650}
-    .pill{display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border:1px dashed #2a426a; border-radius:999px; color:var(--muted)}
-    /* centered offer card */
-    .offer{
-      margin:48px auto 18px; max-width:760px; padding:26px 22px; border-radius:var(--radius);
-      background:linear-gradient(180deg,#0d1626,#0b121f); border:1px solid #1f3050; box-shadow:var(--glow);
-      text-align:center;
+    .btn:hover{transform:translateY(-1px); border-color:rgba(230,242,255,.22)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#6aa8ff); color:#08111f; border-color:transparent}
+    .btn.secondary{background:rgba(14,19,26,.85)}
+    .btn.ghost{background:transparent}
+    .hero{padding:70px 0 30px}
+    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:center}
+    .h1{font-size:42px; line-height:1.08; margin:10px 0 12px; font-weight:800}
+    .sub{font-size:18px; color:var(--muted); margin:0 0 22px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px}
+    .note{font-size:13px; color:var(--muted)}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(230,242,255,.08); border-radius:var(--radius-xl); padding:18px}
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px}
+    .stat{background:rgba(255,255,255,.03); border:1px solid rgba(230,242,255,.06); padding:14px; border-radius:16px; text-align:center}
+    .stat b{font-size:20px}
+    section{padding:48px 0}
+    .section-title{font-size:26px; margin:0 0 14px; font-weight:800}
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .value{padding:18px; border:1px solid rgba(230,242,255,.08); background:rgba(255,255,255,.03); border-radius:18px}
+    .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
+    .pill{padding:8px 12px; border:1px solid rgba(230,242,255,.12); border-radius:999px; font-size:12px; cursor:pointer; background:rgba(255,255,255,.03)}
+    .pill.active{background:rgba(56,255,166,.15); border-color:rgba(56,255,166,.35)}
+    .video-card video, .video-card .video-fallback{width:100%; height:auto; border-radius:16px; border:1px solid rgba(230,242,255,.12); background:#000}
+    .video-meta{display:flex; align-items:center; justify-content:space-between; margin-top:10px}
+    .kpis{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    .kpi{font-size:12px; color:#08111f; background:linear-gradient(135deg,#34d399,#a7f3d0); border-radius:999px; padding:6px 10px}
+    .two-col{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
+    .card{border:1px solid rgba(230,242,255,.08); background:rgba(255,255,255,.03); border-radius:18px; padding:18px}
+    form{display:grid; gap:12px}
+    input, select, textarea{
+      width:100%; padding:12px 12px; border-radius:12px; border:1px solid rgba(230,242,255,.12);
+      background:rgba(10,14,19,.75); color:var(--ink); outline:none; font-size:14px;
     }
-    .price{font-size:38px; font-weight:800}
-    .subtitle{color:var(--muted); margin:8px 0 4px}
-    .bullets{display:grid; grid-template-columns:1fr; gap:8px; margin:14px auto 0; max-width:620px; color:#cfe1ff}
-    .bullets li{list-style:none}
-    /* demo */
-    .section{margin:64px auto 0; padding:0 8px}
-    .cards{display:grid; gap:14px}
-    .card{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:16px; border:1px dashed #29416a; border-radius:999px; background:linear-gradient(180deg,#0b1220,#0a111d);
-    }
-    .num{
-      font-weight:800; font-size:18px; padding:10px 16px; border-radius:999px;
-      background:#0c1d39; box-shadow:inset 0 0 18px rgba(14,95,255,.2);
-      white-space:nowrap; /* keep phone on one line */
-    }
-    /* testimonials */
-    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-    .t{padding:18px; border-radius:var(--radius); background:linear-gradient(180deg,#0c1424,#0a111d); border:1px solid #1c2a46}
-    .t small{color:var(--muted)}
-    /* form */
-    .formWrap{max-width:760px; margin:10px auto 90px; padding:18px; border-radius:var(--radius); background:linear-gradient(180deg,#0c1424,#0a111d); border:1px solid #1c2a46}
-    .formWrap h2{text-align:center; margin:8px 0 6px}
-    .hint{text-align:center; color:var(--muted); margin:0 0 16px}
-    .row{display:flex; flex-direction:column; gap:12px}
-    input, textarea{
-      width:100%; padding:14px 15px; border-radius:12px; border:1px solid #243a60; outline:none; background:#0b1220; color:#e6f2ff;
-    }
-    textarea{min-height:110px; resize:vertical}
-    .msg{margin-top:10px; text-align:center; font-weight:600}
-    .ok{color:#62ffcc} .err{color:#ff7b7b}
-    footer{border-top:1px solid #16243d; color:#7690b2; padding:18px 0; font-size:14px}
-    @media (max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .hero h1{font-size:34px}
-      .btn{width:100%}
-      .card{flex-direction:column; align-items:flex-start}
+    .help{font-size:12px; color:var(--muted)}
+    .pricing{display:grid; grid-template-columns:1fr; gap:16px; max-width:720px}
+    .price{display:flex; align-items:end; gap:8px}
+    .price .amt{font-size:36px; font-weight:800}
+    .foot{padding:28px 0 50px; border-top:1px solid rgba(230,242,255,.06); color:var(--muted); font-size:13px}
+    .hidden{display:none !important}
+    @media (max-width:960px){
+      .hero-grid, .two-col{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+      .h1{font-size:34px}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <!-- Header -->
-    <header>
-      <a class="logo" href="#demo"><b>VoxLead</b></a>
-      <div class="tag">
-        AI Receptionist for Dental Clinics —
-        <a href="#demo"><u>Try now</u></a>
-      </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-      <h1>
-        Never miss a call again<br>
-        Your AI Receptionist<br>
-        books your clients 24/7
-      </h1>
-      <p style="text-align:center">
-        $499 covers setup and your first month. After installation, $199/mo starts in month two.
-      </p>
-      <div class="ctaRow">
-        <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604" target="_blank" rel="noopener">Get started — $499</a>
-        <a class="btn alt" href="#demo">Try Your AI Receptionist now</a>
-      </div>
-    </section>
-
-    <!-- Centered Offer Card -->
-    <div class="offer">
-      <div class="price">$199 <span class="subtitle">/ month • Managed service</span></div>
-      <div class="subtitle">+ One-time setup fee <b>$499</b> to provision your AI Receptionist</div>
-      <ul class="bullets">
-        <li><strong>No missed calls → no lost clients</strong></li>
-        <li><strong>24/7 booking and call handling</strong></li>
-        <li><strong>Set up once, we manage everything</strong></li>
-        <li><strong>Pays for itself from day one</strong></li>
-        <li><strong>Never sick, never late, never on break</strong></li>
-      </ul>
-      <div class="ctaRow" style="margin-top:18px">
-        <a class="btn" href="https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604" target="_blank" rel="noopener">Start $499 setup</a>
-      </div>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></div>
+      <nav>
+        <a class="btn ghost" href="#demo">Demo</a>
+        <a class="btn ghost" href="#value">Why</a>
+        <a class="btn ghost" href="#call">Book a Call</a>
+        <a class="btn primary" href="#demo" id="navDemoBtn">Watch 30-Second Demo</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Demo (merged to one row) -->
-    <section id="demo" class="section">
-      <h2 style="text-align:center">Try Your AI Receptionist now</h2>
-      <div class="cards">
-        <div class="card">
-          <div>
-            <div style="font-weight:700">Live demo</div>
-            <div class="tag">Say: “Book a whitening next Tuesday morning,” ask hours, services, or try a reschedule.</div>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1 class="h1">Double your appointments without extra staff</h1>
+          <p class="sub">The <b>AI Growth System</b> that answers instantly, talks like a human, and books 24/7 so you never miss a patient.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#demo" id="heroDemoBtn">Watch 30-Second Demo</a>
+            <a class="btn secondary" href="#call" id="heroCallBtn">Book a 15-Minute Call</a>
           </div>
-          <a class="num" href="tel:+13238709970">+1 (323) 870 9970</a>
-          <a class="btn alt" href="tel:+13238709970">Call now</a>
+          <p class="note">Cheaper than one missed visit • Works with Calendly, Google Calendar, and more</p>
+          <div class="stats">
+            <div class="stat"><b>+28%</b><div class="note">more calls answered</div></div>
+            <div class="stat"><b>+35%</b><div class="note">new appointments in 30 days</div></div>
+            <div class="stat"><b>&lt;24h</b><div class="note">average setup time</div></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="video-card">
+            <video id="demoVideo" controls preload="none" poster="" playsinline>
+              <!-- Replace with your hosted demo clip(s). Keeping an empty source is safe; the UI still renders. -->
+              <source id="videoSrc" src="" type="video/mp4" />
+              <div class="video-fallback" style="padding:24px">
+                <p class="note">Demo video placeholder. Upload a 30-sec clip per niche and set URLs in the script at the bottom.</p>
+              </div>
+            </video>
+            <div class="video-meta">
+              <div>
+                <strong id="demoTitle">See it work in 30 seconds</strong>
+                <div class="note" id="demoDesc">Answers instantly, books into your calendar, and follows up by SMS.</div>
+              </div>
+              <div class="kpis">
+                <span class="kpi">24/7 coverage</span>
+                <span class="kpi">Human-like voice</span>
+                <span class="kpi">Instant booking</span>
+              </div>
+            </div>
+            <div class="tag-row" id="nicheRow">
+              <button class="pill active" data-niche="dentist">Dentist</button>
+              <button class="pill" data-niche="medspa">Med Spa</button>
+              <button class="pill" data-niche="chiro">Chiropractic</button>
+              <button class="pill" data-niche="auto">Auto Service</button>
+            </div>
+            <div class="cta-row" style="margin-top:10px">
+              <a class="btn secondary" href="#call" id="demoCallBtn">Prefer a walkthrough? Book a call</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Proof / pains -->
-    <section class="section">
-      <div class="grid">
-        <div class="t">
-          <div style="font-size:18px; font-weight:700">“We started earning more from day one.”</div>
-          <small>— Great Smiles Dental, Beverly Hills, CA</small>
-        </div>
-        <div class="t">
-          <div style="font-size:18px; font-weight:700">“Appointments set without staff. Calendar stays clean and full.”</div>
-          <small>— Glendale Ortho, CA</small>
-        </div>
-        <div class="t">
-          <div style="font-size:18px; font-weight:700">“Setup was quick. AI Receptionist sounds on-brand.”</div>
-          <small>— Culver City Dental Labs, CA</small>
+    <!-- VALUE -->
+    <section id="value">
+      <div class="wrap">
+        <h2 class="section-title">Why clinics pick VoxLead</h2>
+        <div class="grid-3">
+          <div class="value">
+            <h3>Never miss a patient</h3>
+            <p class="note">Answers every call instantly, 24/7. No more after-hours loss.</p>
+          </div>
+          <div class="value">
+            <h3>Books for you</h3>
+            <p class="note">Direct calendar booking with confirmations and SMS follow-ups.</p>
+          </div>
+          <div class="value">
+            <h3>Cheaper than one missed visit</h3>
+            <p class="note">Predictable monthly cost. Scales without hiring.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Form -->
-    <section class="formWrap" id="setup">
-      <h2>Free setup call</h2>
-      <p class="hint">Tell us hours, services, parking rules, and how you want bookings handled. We’ll provision a demo line and show bookings within 24 hours.</p>
+    <!-- CALENDLY + FORM -->
+    <section id="call">
+      <div class="wrap two-col">
+        <div class="card" id="calendlyCard">
+          <h2 class="section-title">Book a 15-minute call</h2>
+          <p class="note">See your setup and pricing in context. No pressure.</p>
+          <!-- Calendly Inline Embed -->
+          <div class="card" style="padding:0; overflow:hidden">
+            <div id="calendlyInline" class="calendly-inline-widget" style="min-width:280px;height:660px;border-radius:16px" aria-busy="true"></div>
+          </div>
+          <p class="help" id="calendlyFallback" class="hidden"></p>
+        </div>
 
-      <form id="lead-form" class="row" autocomplete="on">
-        <input name="name" type="text" placeholder="Your name" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="phone" type="tel" placeholder="Phone" required />
-        <input name="business" type="text" placeholder="Business / clinic" required />
-        <textarea name="details" placeholder="What should your AI Receptionist say? Hours, services, parking, rules…"></textarea>
-
-        <button class="btn" type="submit" id="submitBtn">Submit</button>
-        <div id="formMsg" class="msg" aria-live="polite"></div>
-      </form>
-      <div class="msg ok" style="text-align:center; margin-top:10px;">Thanks — we’ll reply within 1 business day.</div>
+        <div class="card">
+          <h2 class="section-title">Quick intake</h2>
+          <p class="note">We’ll send your niche demo and next steps.</p>
+          <form id="leadForm" novalidate>
+            <input type="text" id="fName" name="name" placeholder="Your name" required />
+            <input type="email" id="fEmail" name="email" placeholder="Email" required />
+            <input type="tel" id="fPhone" name="phone" placeholder="Phone" required />
+            <input type="text" id="fClinic" name="clinic" placeholder="Clinic / Business name" required />
+            <input type="text" id="fCity" name="city" placeholder="City" />
+            <select id="fNiche" name="niche" required>
+              <option value="">Select niche…</option>
+              <option>Dentist</option>
+              <option>Med Spa</option>
+              <option>Chiropractic</option>
+              <option>Auto Service</option>
+            </select>
+            <button class="btn primary" type="submit" id="formSubmitBtn">Send &amp; Get Demo</button>
+            <p class="help" id="formHelp">We’ll reply within 24 hours. Your info is never shared.</p>
+            <p class="help hidden" id="formOk" style="color:var(--ok)">Thanks — check your inbox and SMS for the demo.</p>
+            <p class="help hidden" id="formErr" style="color:var(--err)">Couldn’t submit right now. Please try again or book a call.</p>
+          </form>
+        </div>
+      </div>
     </section>
 
-    <footer class="wrap" style="padding-left:0;padding-right:0">
-      © 2025 VoxLead Agency • 9350 Wilshire Blvd, Beverly Hills • <a href="mailto:hello@voxlead.agency">hello@voxlead.agency</a>
-    </footer>
-  </div>
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="wrap">
+        <h2 class="section-title">Simple pricing</h2>
+        <div class="pricing">
+          <div class="card">
+            <div class="price"><span class="amt">$199</span><span class="note">/ month • Managed service</span></div>
+            <ul class="note">
+              <li>One-time setup $499</li>
+              <li>AI Growth System answers &amp; books 24/7</li>
+              <li>Works with Calendly, Google Calendar, and more</li>
+              <li>Month-to-month, cancel anytime</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn primary" href="#call" id="priceCallBtn">Book a Call</a>
+              <a class="btn secondary" href="#" id="stripeBtn" rel="nofollow">Start $499 Setup</a>
+            </div>
+            <p class="help">Tip: Book a call first. We’ll tailor setup to your niche.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div>© <span id="year"></span> VoxLead.Agency • Los Angeles</div>
+      <div class="note">Never miss a client again.</div>
+    </div>
+  </footer>
+
+  <!-- Calendly script (loaded lazily) -->
+  <script defer src="https://assets.calendly.com/assets/external/widget.js"></script>
 
   <script>
-    // === CONFIG: endpoints ===
-    const APPS_SCRIPT_WEBAPP = "https://script.google.com/macros/s/AKfycbxowdnfrN_pBAxzTfDpHL6nSLmWqpASaahL17cd8CNChHPruuz6ipNVLrp5E7HFfIe9ZQ/exec";
-    const STRIPE_LINK = "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604";
+    // ======= CONFIG =======
+    // Provide your URLs here. Page still works if left blank.
+    const CALENDLY_URL = ""; // e.g., "https://calendly.com/voxlead/15min"
+    const STRIPE_CHECKOUT_URL = ""; // e.g., "https://checkout.stripe.com/pay/..."
+    const APP_SCRIPT_URL = ""; // Google Apps Script web app endpoint for the intake form
 
-    // Form submission: use x-www-form-urlencoded to avoid CORS preflight
-    const form = document.getElementById('lead-form');
-    const msg  = document.getElementById('formMsg');
-    const btn  = document.getElementById('submitBtn');
+    // Optional niche demo clips (mp4). You can leave blank safely.
+    const DEMO_VIDEOS = {
+      dentist: "",     // "https://cdn.yoursite.com/demos/dentist.mp4"
+      medspa:  "",     // "https://cdn.yoursite.com/demos/medspa.mp4"
+      chiro:   "",     // "https://cdn.yoursite.com/demos/chiro.mp4"
+      auto:    ""      // "https://cdn.yoursite.com/demos/auto.mp4"
+    };
 
-    form.addEventListener('submit', async (e) => {
+    // ======= BASE =======
+    const $ = (sel, ctx=document)=>ctx.querySelector(sel);
+    const $$ = (sel, ctx=document)=>Array.from(ctx.querySelectorAll(sel));
+    const yearEl = $("#year"); if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // UTM passthrough for Calendly/Stripe
+    function currentUtm() {
+      const params = new URLSearchParams(location.search);
+      const keep = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+      const out = new URLSearchParams();
+      keep.forEach(k=>{ if(params.get(k)) out.set(k, params.get(k)); });
+      return out.toString();
+    }
+    function withUtm(url){
+      if(!url) return "";
+      const hasQ = url.includes("?"); const utm = currentUtm();
+      return utm ? (url + (hasQ ? "&" : "?") + utm) : url;
+    }
+
+    // Track basic events without external deps
+    window.dataLayer = window.dataLayer || [];
+    function track(evt, detail={}){ try{ window.dataLayer.push({event:evt,...detail}); }catch(_){} }
+
+    // Button events
+    $("#navDemoBtn")?.addEventListener("click", ()=>track("demo_nav_click"));
+    $("#heroDemoBtn")?.addEventListener("click", ()=>track("demo_hero_click"));
+    $("#heroCallBtn")?.addEventListener("click", ()=>track("call_hero_click"));
+    $("#demoCallBtn")?.addEventListener("click", ()=>track("call_demo_click"));
+    $("#priceCallBtn")?.addEventListener("click", ()=>track("call_pricing_click"));
+
+    // Stripe button
+    const stripeBtn = $("#stripeBtn");
+    if (STRIPE_CHECKOUT_URL) {
+      stripeBtn.href = withUtm(STRIPE_CHECKOUT_URL);
+      stripeBtn.addEventListener("click", ()=>track("stripe_click"));
+    } else {
+      // If no Stripe link yet, keep as non-blocking
+      stripeBtn.addEventListener("click", (e)=>{
+        e.preventDefault();
+        alert("Setup checkout link not configured yet. Book a call first.");
+      });
+    }
+
+    // ======= CALENDLY EMBED (with graceful fallback) =======
+    (function initCalendly(){
+      const el = document.getElementById("calendlyInline");
+      const fb = document.getElementById("calendlyFallback");
+      if (CALENDLY_URL && window.Calendly) {
+        el.setAttribute("data-url", withUtm(CALENDLY_URL));
+        try { window.Calendly.initInlineWidget({ url: withUtm(CALENDLY_URL), parentElement: el }); track("calendly_loaded"); }
+        catch { fb.textContent = "Calendly couldn’t load. Open in a new tab: " + CALENDLY_URL; fb.classList.remove("hidden"); }
+      } else if (CALENDLY_URL && !window.Calendly) {
+        // Script loads async; wait a bit
+        const tryInit = setInterval(()=>{
+          if(window.Calendly){
+            clearInterval(tryInit);
+            try { window.Calendly.initInlineWidget({ url: withUtm(CALENDLY_URL), parentElement: el }); track("calendly_loaded"); }
+            catch { fb.textContent = "Calendly couldn’t load. Open in a new tab: " + CALENDLY_URL; fb.classList.remove("hidden"); }
+          }
+        }, 400);
+        setTimeout(()=>clearInterval(tryInit), 8000);
+      } else {
+        // No Calendly configured — provide safe fallback
+        el.innerHTML = `
+          <div style="padding:18px">
+            <p class="help">Scheduling link not configured yet. You can still reach us:</p>
+            <div class="cta-row">
+              <a class="btn primary" href="tel:3103416442">Call 310-341-6442</a>
+              <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
+            </div>
+          </div>`;
+      }
+    })();
+
+    // ======= NICHE TOGGLER / DEMO SWAP =======
+    const nicheRow = document.getElementById("nicheRow");
+    const video = document.getElementById("demoVideo");
+    const videoSrc = document.getElementById("videoSrc");
+    const demoTitle = document.getElementById("demoTitle");
+    const copyByNiche = {
+      dentist: { title:"Dental demo — 30 seconds" },
+      medspa:  { title:"Med Spa demo — 30 seconds" },
+      chiro:   { title:"Chiropractic demo — 30 seconds" },
+      auto:    { title:"Auto Service demo — 30 seconds" }
+    };
+    function setNiche(n){
+      $$(".pill", nicheRow).forEach(p=>p.classList.toggle("active", p.dataset.niche===n));
+      const url = DEMO_VIDEOS[n] || "";
+      if (videoSrc) videoSrc.src = url;
+      if (video) { try { video.load(); } catch(_){} }
+      demoTitle.textContent = (copyByNiche[n]?.title)||"See it work in 30 seconds";
+      track("demo_niche_select",{niche:n});
+    }
+    nicheRow?.addEventListener("click",(e)=>{
+      const btn = e.target.closest(".pill");
+      if(!btn) return;
+      setNiche(btn.dataset.niche);
+    });
+    // Default
+    setNiche("dentist");
+
+    // ======= INTAKE FORM (Apps Script; safe fallback) =======
+    const form = document.getElementById("leadForm");
+    const ok = document.getElementById("formOk");
+    const err = document.getElementById("formErr");
+    const help = document.getElementById("formHelp");
+    form?.addEventListener("submit", async (e)=>{
       e.preventDefault();
-      msg.textContent = "";
-      btn.disabled = true; btn.textContent = "Submitting…";
+      ok.classList.add("hidden"); err.classList.add("hidden");
+      const btn = document.getElementById("formSubmitBtn");
+      btn.disabled = true; btn.textContent = "Sending…";
+      track("lead_form_submit_attempt");
 
-      const data = new URLSearchParams(new FormData(form)); // name, email, phone, business, details
+      // Build payload
+      const fd = new FormData(form);
+      // Also include selected niche from video pills if user didn’t choose
+      if(!fd.get("niche")){
+        const active = $(".pill.active", nicheRow);
+        if (active) fd.set("niche", active.dataset.niche);
+      }
 
-      try {
-        const res = await fetch(APPS_SCRIPT_WEBAPP, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: data
-        });
+      // UTM params
+      const params = new URLSearchParams(location.search);
+      ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(k=>{
+        if(params.get(k)) fd.append(k, params.get(k));
+      });
 
-        // Apps Script often returns opaque on no-cors; treat 200/opaque as success if no exception
-        if (!res || (res.status && res.status >= 400)) throw new Error('Bad response');
+      async function simulateSuccess(){
+        await new Promise(r=>setTimeout(r, 300));
+        ok.classList.remove("hidden"); help.classList.add("hidden");
+        track("lead_form_submit_success",{simulated:true});
+        form.reset(); btn.disabled=false; btn.textContent="Send & Get Demo";
+      }
 
-        form.reset();
-        msg.className = "msg ok";
-        msg.textContent = "Thanks — we’ll reply within 1 business day.";
-      } catch (err) {
-        msg.className = "msg err";
-        msg.textContent = "Submission failed. Email hello@voxlead.agency and we’ll assist.";
-      } finally {
-        btn.disabled = false; btn.textContent = "Submit";
+      if (!APP_SCRIPT_URL) { console.warn("APP_SCRIPT_URL not configured; simulating success."); return simulateSuccess(); }
+
+      try{
+        const res = await fetch(APP_SCRIPT_URL, { method:"POST", body: fd, mode:"no-cors" });
+        // Apps Script often returns opaque. Treat as success.
+        ok.classList.remove("hidden"); help.classList.add("hidden");
+        track("lead_form_submit_success",{opaque: res.type==="opaque"});
+      }catch(ex){
+        console.error(ex);
+        err.classList.remove("hidden");
+        track("lead_form_submit_error",{msg:String(ex)});
+      }finally{
+        btn.disabled=false; btn.textContent="Send & Get Demo";
+        try{ form.reset(); }catch(_){}
       }
     });
 
-    // Make every “Get started” click use Stripe
-    for (const a of document.querySelectorAll('a[href=\"#pay\"], .pay')) {
-      a.addEventListener('click', (e) => {
+    // Smooth-scroll for hash links
+    $$('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const id = a.getAttribute("href");
+        if(!id || id==="#" ) return;
+        const el = document.querySelector(id);
+        if(!el) return;
         e.preventDefault();
-        window.open(STRIPE_LINK, '_blank', 'noopener');
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+        history.replaceState(null,"",id);
       });
+    });
+
+    // Expose Stripe link with UTM if provided
+    if (STRIPE_CHECKOUT_URL) {
+      document.getElementById("stripeBtn").href = withUtm(STRIPE_CHECKOUT_URL);
     }
   </script>
-  <!-- FAQ -->
-<section id="faq" class="section">
-  <h2 style="text-align:center">Frequently asked questions</h2>
-  <div class="grid">
-    <div class="t">
-      <h3 style="margin-top:0">What is VoxLead and how does it work?</h3>
-      <p>VoxLead is a managed AI receptionist. It answers inbound calls, qualifies callers, handles simple questions, and books appointments so you don’t lose revenue to missed calls.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Will callers notice it’s AI?</h3>
-      <p>Most assume it’s a human. We tune voice, phrasing, and business details during onboarding so it matches your brand and sounds natural.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Can it transfer calls to my team?</h3>
-      <p>Yes. After qualification it can warm-transfer to a direct line or send notes via text/email if no one is available.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Can I control what it says?</h3>
-      <p>Yes. You set hours, services, pricing notes, and rules. We maintain the script and update it as your policies change.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Does it book appointments?</h3>
-      <p>Yes. We connect to your calendar (e.g., Google Calendar, Calendly, Acuity, or your practice software) and book in real time using your availability.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Will this work with my CRM or booking tool?</h3>
-      <p>In most cases, yes. We integrate with popular calendars and CRMs and can use webhooks/API when needed. We confirm fit during onboarding.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Do I need to install anything?</h3>
-      <p>No software to install. You forward your phone line and share calendar access. Typical setup takes ~30 minutes.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">Which businesses get the most value?</h3>
-      <p>Clinics and service businesses that rely on phone bookings: dental, med spa, chiropractic, legal, home services, real estate, and more.</p>
-    </div>
-
-    <div class="t">
-      <h3 style="margin-top:0">What does it cost and are there contracts?</h3>
-      <p>$499 covers setup and your first month. After installation, $199/mo starts in month two. Month-to-month, cancel anytime.</p>
-    </div>
-  </div>
-
-  <div class="ctaRow" style="margin-top:18px; justify-content:center">
-    <a class="btn" href="#setup">Start $499 setup</a>
-    <a class="btn alt" href="#demo">Try Your AI Receptionist now</a>
-  </div>
-</section>
 </body>
 </html>
