@@ -1,5 +1,4 @@
 <!doctype html>
-<body id="top">
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -85,10 +84,10 @@
   </style>
 </head>
 
-<body>
+<body id="top">
   <header>
     <div class="wrap nav">
-        <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></a>
+      <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></a>
       <nav>
         <a class="btn ghost" href="#demo">Demo</a>
         <a class="btn ghost" href="#value">Why</a>
@@ -100,7 +99,7 @@
 
   <main>
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="demo">
       <div class="wrap hero-grid">
         <div>
           <h1 class="h1">Double your appointments without extra staff</h1>
@@ -178,12 +177,8 @@
           <h2 class="section-title">Book a 15-minute call</h2>
           <p class="note">See your setup and pricing in context. No pressure.</p>
 
-          <!-- Inline container will render either:
-               - Calendly widget, or
-               - Google Appointment Schedule iframe, or
-               - Fallback buttons -->
           <div class="card" style="padding:0; overflow:hidden">
-            <div id="bookingInline" style="min-width:280px;height:660px;border-radius:16px" aria-busy="true"></div>
+            <div id="bookingInline" style="min-width:280px;height:220px;border-radius:16px" aria-busy="true"></div>
           </div>
 
           <p class="help hidden" id="bookingFallback"></p>
@@ -245,81 +240,17 @@
     </div>
   </footer>
 
-  <!-- Calendly script (safe to include; used only if BOOKING_URL is a Calendly link) -->
+  <!-- Calendly script (kept; only used if you switch to Calendly) -->
   <script defer src="https://assets.calendly.com/assets/external/widget.js"></script>
 
   <script>
     // ======= CONFIG =======
-    // PUT YOUR URLS HERE:
-    const BOOKING_URL = "https://calendar.app.google/Ja4idHw1JVJf7cwZA"; // Google Calendar booking link
-    const STRIPE_CHECKOUT_URL = ""; // e.g. "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604"
-    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec"; // your working Apps Script URL
+    const BOOKING_URL = "https://calendar.app.google/Ja4idHw1JVJf7cwZA"; // Google Appointment Schedule
+    const STRIPE_CHECKOUT_URL = ""; // Optional Stripe checkout URL
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec";
 
-    // Optional niche demo clips (mp4). You can leave blank safely.
-    const DEMO_VIDEOS = {
-      dentist: "", medspa: "", chiro: "", auto: ""
-    };
-
-    // ======= BOOKING EMBED FIX (Calendly OR Google) =======
-    (function initBooking(){
-      const el = document.getElementById("bookingInline");
-      const fb = document.getElementById("bookingFallback");
-
-      if (!BOOKING_URL) {
-        el.innerHTML = `
-          <div style="padding:18px">
-            <p class="help">Scheduling link not configured yet. You can still reach us:</p>
-            <div class="cta-row">
-              <a class="btn primary" href="tel:3103416442">Call 310-341-6442</a>
-              <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
-            </div>
-          </div>`;
-        return;
-      }
-
-      const url = BOOKING_URL;
-
-      // If Calendly URL → use inline widget
-      if (/calendly\.com/i.test(url)) {
-        const tryInit = setInterval(()=>{
-          if (window.Calendly) {
-            clearInterval(tryInit);
-            try {
-              window.Calendly.initInlineWidget({ url, parentElement: el });
-            } catch {
-              fb.textContent = "Calendly couldn’t load. Open in a new tab: " + url;
-              fb.classList.remove("hidden");
-            }
-          }
-        }, 400);
-        setTimeout(()=>clearInterval(tryInit), 8000);
-        return;
-      }
-
-      // If Google Appointment Schedule → try iframe (supports both calendar.google.com and calendar.app.google)
-      if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
-  // Force open-in-new-tab for better readability on dark pages
-  el.innerHTML = `
-    <div style="padding:18px">
-      <p class="help">Schedule in a clean full page:</p>
-      <div class="cta-row">
-        <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
-        <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
-      </div>
-    </div>`;
-  return;
-}
-
-      // Unknown scheduler → provide a simple fallback link
-      el.innerHTML = `
-        <div style="padding:18px">
-          <div class="cta-row">
-            <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
-            <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
-          </div>
-        </div>`;
-    })();
-  </script>
+    // Optional niche demo clips (mp4)
+    const DEMO_VIDEOS = { dentist:"", medspa:"", chiro:"", auto:"" };
 
     // ======= HELPERS =======
     const $ = (sel, ctx=document)=>ctx.querySelector(sel);
@@ -348,24 +279,12 @@
     $("#demoCallBtn")?.addEventListener("click", ()=>track("call_demo_click"));
     $("#priceCallBtn")?.addEventListener("click", ()=>track("call_pricing_click"));
 
-    // Stripe
-    const stripeBtn = $("#stripeBtn");
-    if (STRIPE_CHECKOUT_URL) {
-      stripeBtn.href = withUtm(STRIPE_CHECKOUT_URL);
-      stripeBtn.addEventListener("click", ()=>track("stripe_click"));
-    } else {
-      stripeBtn.addEventListener("click", (e)=>{
-        e.preventDefault();
-        alert("Setup checkout link not configured yet. Book a call first.");
-      });
-    }
-
-    // ======= BOOKING EMBED (Calendly OR Google) =======
+    // ======= BOOKING (Google or Calendly) =======
     (function initBooking(){
       const el = $("#bookingInline");
-      const fb = $("#bookingFallback");
+      const url = withUtm(BOOKING_URL);
 
-      if (!BOOKING_URL) {
+      if (!url) {
         el.innerHTML = `
           <div style="padding:18px">
             <p class="help">Scheduling link not configured yet. You can still reach us:</p>
@@ -377,98 +296,74 @@
         return;
       }
 
-      const url = withUtm(BOOKING_URL);
-
-      // If Calendly URL → use inline widget
+      // Calendly inline
       if (/calendly\.com/i.test(url)) {
         const tryInit = setInterval(()=>{
           if (window.Calendly) {
             clearInterval(tryInit);
-            try {
-              window.Calendly.initInlineWidget({ url, parentElement: el });
-              track("calendly_loaded");
-            } catch {
-              fb.textContent = "Calendly couldn’t load. Open in a new tab: " + url;
-              fb.classList.remove("hidden");
-            }
+            try { window.Calendly.initInlineWidget({ url, parentElement: el }); }
+            catch { el.innerHTML = linkFallback(url); }
           }
         }, 400);
         setTimeout(()=>clearInterval(tryInit), 8000);
         return;
       }
 
-      // If Google Appointment Schedule → try iframe
-      if (/calendar\.google\.com/i.test(url)) {
-        // Many Google pages allow embedding; if blocked by X-Frame-Options, we show a button fallback.
-        const iframe = document.createElement("iframe");
-        iframe.className = "booking";
-        iframe.src = url;
-        iframe.referrerPolicy = "no-referrer-when-downgrade";
-        iframe.loading = "lazy";
-        iframe.onload = ()=>track("gcal_embed_loaded");
-        iframe.onerror = ()=>showLinkFallback();
-        // Try to attach; if CSP blocks, the onerror fallback will handle UX.
-        try { el.appendChild(iframe); } catch (_) { showLinkFallback(); }
-        function showLinkFallback(){
-          el.innerHTML = `
-            <div style="padding:18px">
-              <p class="help">Open the booking page in a new tab:</p>
-              <div class="cta-row">
-                <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
-                <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
-              </div>
-            </div>`;
-        }
+      // Google Appointment Schedule → open-in-new-tab button (better readability)
+      if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
+        el.innerHTML = linkFallback(url, "Schedule in a clean full page:");
         return;
       }
 
-      // Unknown scheduler → provide a clean link
-      el.innerHTML = `
-        <div style="padding:18px">
-          <div class="cta-row">
-            <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
-            <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
-          </div>
-        </div>`;
+      // Unknown → simple link
+      el.innerHTML = linkFallback(url);
+
+      function linkFallback(u, caption="Open the booking page in a new tab:"){
+        return `
+          <div style="padding:18px">
+            <p class="help">${caption}</p>
+            <div class="cta-row">
+              <a class="btn primary" href="${u}" target="_blank" rel="noopener">Open Booking</a>
+              <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
+            </div>
+          </div>`;
+      }
     })();
 
     // ======= NICHE TOGGLER / DEMO SWAP =======
-    const nicheRow = document.getElementById("nicheRow");
-    const video = document.getElementById("demoVideo");
-    const videoSrc = document.getElementById("videoSrc");
-    const demoTitle = document.getElementById("demoTitle");
+    const nicheRow = $("#nicheRow");
+    const video = $("#demoVideo");
+    const videoSrc = $("#videoSrc");
+    const demoTitle = $("#demoTitle");
     const copyByNiche = {
-      dentist: { title:"Dental demo — 30 seconds" },
-      medspa:  { title:"Med Spa demo — 30 seconds" },
-      chiro:   { title:"Chiropractic demo — 30 seconds" },
-      auto:    { title:"Auto Service demo — 30 seconds" }
+      dentist:{title:"Dental demo — 30 seconds"},
+      medspa:{title:"Med Spa demo — 30 seconds"},
+      chiro:{title:"Chiropractic demo — 30 seconds"},
+      auto:{title:"Auto Service demo — 30 seconds"}
     };
     function setNiche(n){
       $$(".pill", nicheRow).forEach(p=>p.classList.toggle("active", p.dataset.niche===n));
       const url = DEMO_VIDEOS[n] || "";
       if (videoSrc) videoSrc.src = url;
-      if (video) { try { video.load(); } catch(_){} }
-      demoTitle.textContent = (copyByNiche[n]?.title)||"See it work in 30 seconds";
+      if (video) { try{ video.load(); }catch(_){} }
+      demoTitle.textContent = (copyByNiche[n]?.title) || "See it work in 30 seconds";
       track("demo_niche_select",{niche:n});
     }
     nicheRow?.addEventListener("click",(e)=>{
-      const btn = e.target.closest(".pill");
-      if(!btn) return;
+      const btn = e.target.closest(".pill"); if(!btn) return;
       setNiche(btn.dataset.niche);
     });
     setNiche("dentist");
 
-    // ======= INTAKE FORM =======
-    const form = document.getElementById("leadForm");
-    const ok = document.getElementById("formOk");
-    const err = document.getElementById("formErr");
-    const help = document.getElementById("formHelp");
+    // ======= INTAKE FORM → Google Sheet =======
+    const form = $("#leadForm");
+    const ok = $("#formOk");
+    const err = $("#formErr");
+    const help = $("#formHelp");
     form?.addEventListener("submit", async (e)=>{
       e.preventDefault();
       ok.classList.add("hidden"); err.classList.add("hidden");
-      const btn = document.getElementById("formSubmitBtn");
-      btn.disabled = true; btn.textContent = "Sending…";
-      track("lead_form_submit_attempt");
+      const btn = $("#formSubmitBtn"); btn.disabled = true; btn.textContent = "Sending…"; track("lead_form_submit_attempt");
 
       const fd = new FormData(form);
       if(!fd.get("niche")){
@@ -482,21 +377,17 @@
 
       async function simulateSuccess(){
         await new Promise(r=>setTimeout(r, 300));
-        ok.classList.remove("hidden"); help.classList.add("hidden");
-        track("lead_form_submit_success",{simulated:true});
-        form.reset(); btn.disabled=false; btn.textContent="Send & Get Demo";
+        ok.classList.remove("hidden"); help.classList.add("hidden"); form.reset();
+        btn.disabled=false; btn.textContent="Send & Get Demo";
       }
 
       if (!APP_SCRIPT_URL) { console.warn("APP_SCRIPT_URL not configured; simulating success."); return simulateSuccess(); }
 
       try{
-        const res = await fetch(APP_SCRIPT_URL, { method:"POST", body: fd, mode:"no-cors" });
+        await fetch(APP_SCRIPT_URL, { method:"POST", body: fd, mode:"no-cors" });
         ok.classList.remove("hidden"); help.classList.add("hidden");
-        track("lead_form_submit_success",{opaque: res.type==="opaque"});
       }catch(ex){
-        console.error(ex);
-        err.classList.remove("hidden");
-        track("lead_form_submit_error",{msg:String(ex)});
+        console.error(ex); err.classList.remove("hidden");
       }finally{
         btn.disabled=false; btn.textContent="Send & Get Demo";
         try{ form.reset(); }catch(_){}
@@ -506,20 +397,15 @@
     // Smooth-scroll for hash links
     $$('a[href^="#"]').forEach(a=>{
       a.addEventListener("click", (e)=>{
-        const id = a.getAttribute("href");
-        if(!id || id==="#" ) return;
-        const el = document.querySelector(id);
-        if(!el) return;
-        e.preventDefault();
-        el.scrollIntoView({behavior:"smooth", block:"start"});
+        const id = a.getAttribute("href"); if(!id || id==="#") return;
+        const el = document.querySelector(id); if(!el) return;
+        e.preventDefault(); el.scrollIntoView({behavior:"smooth", block:"start"});
         history.replaceState(null,"",id);
       });
     });
 
-    // Expose Stripe link with UTM if provided
-    if (STRIPE_CHECKOUT_URL) {
-      document.getElementById("stripeBtn").href = withUtm(STRIPE_CHECKOUT_URL);
-    }
+    // Stripe UTM passthrough
+    if (STRIPE_CHECKOUT_URL) $("#stripeBtn").href = withUtm(STRIPE_CHECKOUT_URL);
   </script>
 </body>
 </html>
