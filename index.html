@@ -240,14 +240,14 @@
     </div>
   </footer>
 
-  <!-- Calendly script (kept; only used if you switch to Calendly) -->
+  <!-- Calendly loader (inactive unless you use a calendly.com link) -->
   <script defer src="https://assets.calendly.com/assets/external/widget.js"></script>
 
   <script>
     // ======= CONFIG =======
-    const BOOKING_URL = "https://calendar.app.google/Ja4idHw1JVJf7cwZA";  // Google Calendar booking link
-    const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/28E14m4W2bpBe9Y6A6g3604";  
-    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec";  // your working intake form endpoint
+    const BOOKING_URL = "https://calendar.app.google/Ja4idHw1JVJf7cwZA"; // Google Appointment Schedule
+    const STRIPE_CHECKOUT_URL = ""; // Optional Stripe checkout URL
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec";
 
     // Optional niche demo clips (mp4)
     const DEMO_VIDEOS = { dentist:"", medspa:"", chiro:"", auto:"" };
@@ -256,7 +256,6 @@
     const $ = (sel, ctx=document)=>ctx.querySelector(sel);
     const $$ = (sel, ctx=document)=>Array.from(ctx.querySelectorAll(sel));
     $("#year").textContent = new Date().getFullYear();
-
 
     function currentUtm(){
       const params = new URLSearchParams(location.search);
@@ -270,6 +269,12 @@
       const utm = currentUtm();
       return utm ? (url + (url.includes("?") ? "&" : "?") + utm) : url;
     }
+    function normalize(u){
+      if (!u) return "";
+      // ensure absolute url
+      if (!/^https?:\/\//i.test(u)) u = "https://" + u.replace(/^\/+/, "");
+      return u;
+    }
     window.dataLayer = window.dataLayer || [];
     function track(evt, detail={}){ try{ window.dataLayer.push({event:evt,...detail}); }catch(_){} }
 
@@ -282,8 +287,8 @@
 
     // ======= BOOKING (Google or Calendly) =======
     (function initBooking(){
-      const el = $("#bookingInline");
-      const url = withUtm(BOOKING_URL);
+      const el = document.getElementById("bookingInline");
+      const url = normalize(withUtm(BOOKING_URL));
 
       if (!url) {
         el.innerHTML = `
@@ -310,7 +315,7 @@
         return;
       }
 
-      // Google Appointment Schedule → open-in-new-tab button (better readability)
+      // Google Appointment Schedule → open-in-new-tab button (readable on dark sites)
       if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
         el.innerHTML = linkFallback(url, "Schedule in a clean full page:");
         return;
@@ -332,10 +337,10 @@
     })();
 
     // ======= NICHE TOGGLER / DEMO SWAP =======
-    const nicheRow = $("#nicheRow");
-    const video = $("#demoVideo");
-    const videoSrc = $("#videoSrc");
-    const demoTitle = $("#demoTitle");
+    const nicheRow = document.getElementById("nicheRow");
+    const video = document.getElementById("demoVideo");
+    const videoSrc = document.getElementById("videoSrc");
+    const demoTitle = document.getElementById("demoTitle");
     const copyByNiche = {
       dentist:{title:"Dental demo — 30 seconds"},
       medspa:{title:"Med Spa demo — 30 seconds"},
@@ -357,18 +362,18 @@
     setNiche("dentist");
 
     // ======= INTAKE FORM → Google Sheet =======
-    const form = $("#leadForm");
-    const ok = $("#formOk");
-    const err = $("#formErr");
-    const help = $("#formHelp");
+    const form = document.getElementById("leadForm");
+    const ok = document.getElementById("formOk");
+    const err = document.getElementById("formErr");
+    const help = document.getElementById("formHelp");
     form?.addEventListener("submit", async (e)=>{
       e.preventDefault();
       ok.classList.add("hidden"); err.classList.add("hidden");
-      const btn = $("#formSubmitBtn"); btn.disabled = true; btn.textContent = "Sending…"; track("lead_form_submit_attempt");
+      const btn = document.getElementById("formSubmitBtn"); btn.disabled = true; btn.textContent = "Sending…"; track("lead_form_submit_attempt");
 
       const fd = new FormData(form);
       if(!fd.get("niche")){
-        const active = $(".pill.active", nicheRow);
+        const active = document.querySelector(".pill.active");
         if (active) fd.set("niche", active.dataset.niche);
       }
       const params = new URLSearchParams(location.search);
@@ -396,7 +401,7 @@
     });
 
     // Smooth-scroll for hash links
-    $$('a[href^="#"]').forEach(a=>{
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener("click", (e)=>{
         const id = a.getAttribute("href"); if(!id || id==="#") return;
         const el = document.querySelector(id); if(!el) return;
@@ -406,7 +411,7 @@
     });
 
     // Stripe UTM passthrough
-    if (STRIPE_CHECKOUT_URL) $("#stripeBtn").href = withUtm(STRIPE_CHECKOUT_URL);
+    if (STRIPE_CHECKOUT_URL) document.getElementById("stripeBtn").href = withUtm(STRIPE_CHECKOUT_URL);
   </script>
 </body>
 </html>
