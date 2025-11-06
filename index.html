@@ -1,4 +1,5 @@
 <!doctype html>
+<body id="top">
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -87,7 +88,7 @@
 <body>
   <header>
     <div class="wrap nav">
-      <div class="brand"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></div>
+        <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></a>
       <nav>
         <a class="btn ghost" href="#demo">Demo</a>
         <a class="btn ghost" href="#value">Why</a>
@@ -297,27 +298,17 @@
 
       // If Google Appointment Schedule → try iframe (supports both calendar.google.com and calendar.app.google)
       if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
-        const iframe = document.createElement("iframe");
-        iframe.className = "booking";
-        iframe.src = url;
-        iframe.referrerPolicy = "no-referrer-when-downgrade";
-        iframe.loading = "lazy";
-        iframe.onload = ()=>console.log("Google booking embedded");
-        iframe.onerror = ()=>showLinkFallback();
-        try { el.appendChild(iframe); } catch (_) { showLinkFallback(); }
-
-        function showLinkFallback(){
-          el.innerHTML = `
-            <div style="padding:18px">
-              <p class="help">Open the booking page in a new tab:</p>
-              <div class="cta-row">
-                <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
-                <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
-              </div>
-            </div>`;
-        }
-        return;
-      }
+  // Force open-in-new-tab for better readability on dark pages
+  el.innerHTML = `
+    <div style="padding:18px">
+      <p class="help">Schedule in a clean full page:</p>
+      <div class="cta-row">
+        <a class="btn primary" href="${url}" target="_blank" rel="noopener">Open Booking</a>
+        <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
+      </div>
+    </div>`;
+  return;
+}
 
       // Unknown scheduler → provide a simple fallback link
       el.innerHTML = `
