@@ -57,7 +57,18 @@
     .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
     .pill{padding:8px 12px; border:1px solid rgba(230,242,255,.12); border-radius:999px; font-size:12px; cursor:pointer; background:rgba(255,255,255,.03)}
     .pill.active{background:rgba(56,255,166,.15); border-color:rgba(56,255,166,.35)}
-    .video-card video, .video-card .video-fallback{width:100%; height:auto; border-radius:16px; border:1px solid rgba(230,242,255,.12); background:#000}
+
+    /* YouTube embed container */
+    .video-embed{
+      width:100%;
+      aspect-ratio:16/9;
+      border-radius:16px;
+      border:1px solid rgba(230,242,255,.12);
+      overflow:hidden;
+      background:#000;
+    }
+    .video-embed iframe{width:100%; height:100%; border:0}
+
     .video-meta{display:flex; align-items:center; justify-content:space-between; margin-top:10px}
     .kpis{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
     .kpi{font-size:12px; color:#08111f; background:linear-gradient(135deg,#34d399,#a7f3d0); border-radius:999px; padding:6px 10px}
@@ -118,12 +129,18 @@
 
         <div class="panel">
           <div class="video-card">
-            <video id="demoVideo" controls preload="none" poster="" playsinline>
-              <source id="videoSrc" src="" type="video/mp4" />
-              <div class="video-fallback" style="padding:24px">
-                <p class="note">Demo video placeholder. Upload a 30-sec clip per niche and set URLs in the script at the bottom.</p>
-              </div>
-            </video>
+            <!-- YouTube inline player -->
+            <div class="video-embed">
+              <iframe
+                id="demoFrame"
+                src=""
+                title="VoxLead demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin">
+              </iframe>
+            </div>
+
             <div class="video-meta">
               <div>
                 <strong id="demoTitle">See it work in 30 seconds</strong>
@@ -135,12 +152,14 @@
                 <span class="kpi">Instant booking</span>
               </div>
             </div>
+
             <div class="tag-row" id="nicheRow">
               <button class="pill active" data-niche="dentist">Dentist</button>
               <button class="pill" data-niche="medspa">Med Spa</button>
               <button class="pill" data-niche="chiro">Chiropractic</button>
               <button class="pill" data-niche="auto">Auto Service</button>
             </div>
+
             <div class="cta-row" style="margin-top:10px">
               <a class="btn secondary" href="#call" id="demoCallBtn">Prefer a walkthrough? Book a call</a>
             </div>
@@ -249,8 +268,13 @@
     const STRIPE_CHECKOUT_URL = ""; // Optional Stripe checkout URL
     const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec";
 
-    // Optional niche demo clips (mp4)
-    const DEMO_VIDEOS = { dentist:"", medspa:"", chiro:"", auto:"" };
+    // Your YouTube demo videos (embed format, not the shorts URL)
+    const DEMO_VIDEOS = {
+      dentist: "https://www.youtube.com/embed/yF3eLSYMWSI?rel=0&modestbranding=1",
+      medspa:  "https://www.youtube.com/embed/6-4VFKUhdVA?rel=0&modestbranding=1",
+      auto:    "https://www.youtube.com/embed/1DJuMpXOepw?rel=0&modestbranding=1",
+      chiro:   "https://www.youtube.com/embed/IrxCTRgEjXk?rel=0&modestbranding=1"
+    };
 
     // ======= HELPERS =======
     const $ = (sel, ctx=document)=>ctx.querySelector(sel);
@@ -271,7 +295,6 @@
     }
     function normalize(u){
       if (!u) return "";
-      // ensure absolute url
       if (!/^https?:\/\//i.test(u)) u = "https://" + u.replace(/^\/+/, "");
       return u;
     }
@@ -315,7 +338,7 @@
         return;
       }
 
-      // Google Appointment Schedule → open-in-new-tab button (readable on dark sites)
+      // Google Appointment Schedule → open-in-new-tab button
       if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
         el.innerHTML = linkFallback(url, "Schedule in a clean full page:");
         return;
@@ -336,29 +359,34 @@
       }
     })();
 
-    // ======= NICHE TOGGLER / DEMO SWAP =======
+    // ======= NICHE TOGGLER / DEMO SWAP (YouTube iframe) =======
     const nicheRow = document.getElementById("nicheRow");
-    const video = document.getElementById("demoVideo");
-    const videoSrc = document.getElementById("videoSrc");
+    const frame = document.getElementById("demoFrame");
     const demoTitle = document.getElementById("demoTitle");
+
     const copyByNiche = {
       dentist:{title:"Dental demo — 30 seconds"},
       medspa:{title:"Med Spa demo — 30 seconds"},
       chiro:{title:"Chiropractic demo — 30 seconds"},
       auto:{title:"Auto Service demo — 30 seconds"}
     };
+
     function setNiche(n){
       $$(".pill", nicheRow).forEach(p=>p.classList.toggle("active", p.dataset.niche===n));
-      const url = DEMO_VIDEOS[n] || "";
-      if (videoSrc) videoSrc.src = url;
-      if (video) { try{ video.load(); }catch(_){} }
+      const base = DEMO_VIDEOS[n] || "";
+      // Keep users on-page; no autoplay to avoid intrusive behavior
+      const url = base ? base + "&playsinline=1" : "";
+      if (frame && url) frame.src = url;
       demoTitle.textContent = (copyByNiche[n]?.title) || "See it work in 30 seconds";
       track("demo_niche_select",{niche:n});
     }
+
     nicheRow?.addEventListener("click",(e)=>{
       const btn = e.target.closest(".pill"); if(!btn) return;
       setNiche(btn.dataset.niche);
     });
+
+    // Default selection
     setNiche("dentist");
 
     // ======= INTAKE FORM → Google Sheet =======
