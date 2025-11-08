@@ -16,6 +16,7 @@
       --ok:#12b886; --warn:#ffd43b; --err:#ff6b6b; --shadow:0 10px 30px rgba(0,0,0,.35);
       --radius:16px; --radius-lg:22px; --radius-xl:28px;
       --max:1180px;
+      --neon1:#32ffb4; --neon2:#8affd7;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -40,6 +41,12 @@
     .btn.primary{background:linear-gradient(135deg,var(--brand),#6aa8ff); color:#08111f; border-color:transparent}
     .btn.secondary{background:rgba(14,19,26,.85)}
     .btn.ghost{background:transparent}
+    /* Neon CTA for demo buttons */
+    .btn.demo-cta{
+      background:linear-gradient(135deg,var(--neon1),var(--neon2));
+      color:#061217; border:0;
+      box-shadow:0 0 24px rgba(50,255,180,.35), 0 8px 20px rgba(0,0,0,.35);
+    }
     .hero{padding:70px 0 30px}
     .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:center}
     .h1{font-size:42px; line-height:1.08; margin:10px 0 12px; font-weight:800}
@@ -57,21 +64,14 @@
     .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
     .pill{padding:8px 12px; border:1px solid rgba(230,242,255,.12); border-radius:999px; font-size:12px; cursor:pointer; background:rgba(255,255,255,.03)}
     .pill.active{background:rgba(56,255,166,.15); border-color:rgba(56,255,166,.35)}
-
-    /* YouTube embed container */
-    .video-embed{
-      width:100%;
-      aspect-ratio:16/9;
-      border-radius:16px;
-      border:1px solid rgba(230,242,255,.12);
-      overflow:hidden;
-      background:#000;
-    }
-    .video-embed iframe{width:100%; height:100%; border:0}
-
+    /* Video and feature badges */
+    .video-card iframe{width:100%; aspect-ratio:16/9; border-radius:16px; border:1px solid rgba(230,242,255,.12); background:#000}
     .video-meta{display:flex; align-items:center; justify-content:space-between; margin-top:10px}
     .kpis{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
-    .kpi{font-size:12px; color:#08111f; background:linear-gradient(135deg,#34d399,#a7f3d0); border-radius:999px; padding:6px 10px}
+    .kpi{
+      font-size:13px; color:#061217; background:linear-gradient(135deg,#34d399,#a7f3d0);
+      border-radius:999px; padding:8px 12px; min-width:160px; text-align:center;
+    }
     .two-col{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
     .card{border:1px solid rgba(230,242,255,.08); background:rgba(255,255,255,.03); border-radius:18px; padding:18px}
     form{display:grid; gap:12px}
@@ -91,6 +91,7 @@
       .grid-3{grid-template-columns:1fr}
       .stats{grid-template-columns:1fr 1fr}
       .h1{font-size:34px}
+      .kpi{min-width:unset}
     }
   </style>
 </head>
@@ -98,12 +99,12 @@
 <body id="top">
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></a>
+      <a class="brand" href="/" id="homeLink"><span class="logo" aria-hidden="true"></span><span>VoxLead.Agency</span></a>
       <nav>
         <a class="btn ghost" href="#demo">Demo</a>
         <a class="btn ghost" href="#value">Why</a>
         <a class="btn ghost" href="#call">Book a Call</a>
-        <a class="btn primary" href="#demo" id="navDemoBtn">Watch 30-Second Demo</a>
+        <a class="btn demo-cta" href="#demo" id="navDemoBtn">Watch Demo</a>
       </nav>
     </div>
   </header>
@@ -116,7 +117,7 @@
           <h1 class="h1">Double your appointments without extra staff</h1>
           <p class="sub">The <b>AI Growth System</b> that answers instantly, talks like a human, and books 24/7 so you never miss a patient.</p>
           <div class="cta-row">
-            <a class="btn primary" href="#demo" id="heroDemoBtn">Watch 30-Second Demo</a>
+            <a class="btn demo-cta" href="#demo" id="heroDemoBtn">Watch Demo</a>
             <a class="btn secondary" href="#call" id="heroCallBtn">Book a 15-Minute Call</a>
           </div>
           <p class="note">Cheaper than one missed visit • Works with Calendly, Google Calendar, and more</p>
@@ -129,21 +130,17 @@
 
         <div class="panel">
           <div class="video-card">
-            <!-- YouTube inline player -->
-            <div class="video-embed">
-              <iframe
-                id="demoFrame"
-                src=""
-                title="VoxLead demo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                referrerpolicy="strict-origin-when-cross-origin">
-              </iframe>
-            </div>
+            <!-- YouTube embed swaps per niche -->
+            <iframe id="ytFrame"
+              src="about:blank"
+              title="VoxLead Demo"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
 
             <div class="video-meta">
               <div>
-                <strong id="demoTitle">See it work in 30 seconds</strong>
+                <strong id="demoTitle">Dental demo</strong>
                 <div class="note" id="demoDesc">Answers instantly, books into your calendar, and follows up by SMS.</div>
               </div>
               <div class="kpis">
@@ -268,12 +265,12 @@
     const STRIPE_CHECKOUT_URL = ""; // Optional Stripe checkout URL
     const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwqNRUd-xuXhpHpgyXGvJyKyvVxqW6MhjGCUrHJs57hZXfXNBGitAm4fUMOJhVJiS8Bbw/exec";
 
-    // Your YouTube demo videos (embed format, not the shorts URL)
-    const DEMO_VIDEOS = {
-      dentist: "https://www.youtube.com/embed/yF3eLSYMWSI?rel=0&modestbranding=1",
-      medspa:  "https://www.youtube.com/embed/6-4VFKUhdVA?rel=0&modestbranding=1",
-      auto:    "https://www.youtube.com/embed/1DJuMpXOepw?rel=0&modestbranding=1",
-      chiro:   "https://www.youtube.com/embed/IrxCTRgEjXk?rel=0&modestbranding=1"
+    // YouTube Shorts IDs for each niche
+    const DEMO_YT_IDS = {
+      dentist: "yF3eLSYMWSI",
+      medspa: "6-4VFKUhdVA",
+      auto: "1DJuMpXOepw",
+      chiro: "IrxCTRgEjXk"
     };
 
     // ======= HELPERS =======
@@ -301,6 +298,13 @@
     window.dataLayer = window.dataLayer || [];
     function track(evt, detail={}){ try{ window.dataLayer.push({event:evt,...detail}); }catch(_){} }
 
+    // Hide #top in URL. Keep smooth scroll to top.
+    $("#homeLink")?.addEventListener("click",(e)=>{
+      e.preventDefault();
+      window.scrollTo({top:0, behavior:"smooth"});
+      try{ history.replaceState(null,"","/"); }catch(_){}
+    });
+
     // ======= CTA EVENTS =======
     $("#navDemoBtn")?.addEventListener("click", ()=>track("demo_nav_click"));
     $("#heroDemoBtn")?.addEventListener("click", ()=>track("demo_hero_click"));
@@ -318,14 +322,13 @@
           <div style="padding:18px">
             <p class="help">Scheduling link not configured yet. You can still reach us:</p>
             <div class="cta-row">
-              <a class="btn primary" href="tel:3103416442">Call 310-341-6442</a>
+              <a class="btn demo-cta" href="tel:3103416442">Call 310-341-6442</a>
               <a class="btn secondary" href="mailto:hello@voxlead.agency">Email hello@voxlead.agency</a>
             </div>
           </div>`;
         return;
       }
 
-      // Calendly inline
       if (/calendly\.com/i.test(url)) {
         const tryInit = setInterval(()=>{
           if (window.Calendly) {
@@ -338,13 +341,11 @@
         return;
       }
 
-      // Google Appointment Schedule → open-in-new-tab button
       if (/calendar\.google\.com|calendar\.app\.google/i.test(url)) {
         el.innerHTML = linkFallback(url, "Schedule in a clean full page:");
         return;
       }
 
-      // Unknown → simple link
       el.innerHTML = linkFallback(url);
 
       function linkFallback(u, caption="Open the booking page in a new tab:"){
@@ -352,41 +353,42 @@
           <div style="padding:18px">
             <p class="help">${caption}</p>
             <div class="cta-row">
-              <a class="btn primary" href="${u}" target="_blank" rel="noopener">Open Booking</a>
+              <a class="btn demo-cta" href="${u}" target="_blank" rel="noopener">Open Booking</a>
               <a class="btn secondary" href="mailto:hello@voxlead.agency">Or email us</a>
             </div>
           </div>`;
       }
     })();
 
-    // ======= NICHE TOGGLER / DEMO SWAP (YouTube iframe) =======
+    // ======= NICHE TOGGLER / YOUTUBE SWAP =======
     const nicheRow = document.getElementById("nicheRow");
-    const frame = document.getElementById("demoFrame");
+    const ytFrame = document.getElementById("ytFrame");
     const demoTitle = document.getElementById("demoTitle");
-
     const copyByNiche = {
-      dentist:{title:"Dental demo — 30 seconds"},
-      medspa:{title:"Med Spa demo — 30 seconds"},
-      chiro:{title:"Chiropractic demo — 30 seconds"},
-      auto:{title:"Auto Service demo — 30 seconds"}
+      dentist:{title:"Dental demo"},
+      medspa:{title:"Med Spa demo"},
+      chiro:{title:"Chiropractic demo"},
+      auto:{title:"Auto Service demo"}
     };
+
+    function ytUrl(id){
+      const params = new URLSearchParams({
+        autoplay: 0, rel: 0, modestbranding: 1, playsinline: 1
+      });
+      return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+    }
 
     function setNiche(n){
       $$(".pill", nicheRow).forEach(p=>p.classList.toggle("active", p.dataset.niche===n));
-      const base = DEMO_VIDEOS[n] || "";
-      // Keep users on-page; no autoplay to avoid intrusive behavior
-      const url = base ? base + "&playsinline=1" : "";
-      if (frame && url) frame.src = url;
-      demoTitle.textContent = (copyByNiche[n]?.title) || "See it work in 30 seconds";
+      const id = DEMO_YT_IDS[n] || DEMO_YT_IDS.dentist;
+      ytFrame.src = ytUrl(id);
+      demoTitle.textContent = (copyByNiche[n]?.title)||"Demo";
       track("demo_niche_select",{niche:n});
     }
-
     nicheRow?.addEventListener("click",(e)=>{
       const btn = e.target.closest(".pill"); if(!btn) return;
       setNiche(btn.dataset.niche);
     });
-
-    // Default selection
     setNiche("dentist");
 
     // ======= INTAKE FORM → Google Sheet =======
@@ -434,7 +436,7 @@
         const id = a.getAttribute("href"); if(!id || id==="#") return;
         const el = document.querySelector(id); if(!el) return;
         e.preventDefault(); el.scrollIntoView({behavior:"smooth", block:"start"});
-        history.replaceState(null,"",id);
+        try{ history.replaceState(null,"",location.pathname); }catch(_){}
       });
     });
 
