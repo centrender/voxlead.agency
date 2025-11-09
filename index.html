@@ -48,7 +48,8 @@
       box-shadow:0 0 24px rgba(50,255,180,.35), 0 8px 20px rgba(0,0,0,.35);
     }
     .hero{padding:70px 0 30px}
-    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:center}
+    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:start}
+    .hero-left{display:flex; flex-direction:column; align-items:center; text-align:center}
     .h1{font-size:42px; line-height:1.08; margin:10px 0 12px; font-weight:800}
     .sub{font-size:18px; color:var(--muted); margin:0 0 22px}
     .cta-row{display:flex; flex-wrap:wrap; gap:12px}
@@ -113,8 +114,8 @@
     <!-- HERO -->
     <section class="hero" id="demo">
       <div class="wrap hero-grid">
-        <div>
-          <h1 class="h1">Double your appointments without extra staff</h1>
+        <div class="hero-left">
+          <h1 class="h1">Double your appointments<br>without extra staff</h1>
           <p class="sub">The <b>AI Growth System</b> that answers instantly, talks like a human, and books 24/7 so you never miss a patient.</p>
           <div class="cta-row">
             <a class="btn demo-cta" href="#demo" id="heroDemoBtn">Watch Demo</a>
@@ -298,7 +299,7 @@
     window.dataLayer = window.dataLayer || [];
     function track(evt, detail={}){ try{ window.dataLayer.push({event:evt,...detail}); }catch(_){} }
 
-    // Hide #top in URL. Keep smooth scroll to top.
+    // Hide #top in URL. Smooth scroll to top.
     $("#homeLink")?.addEventListener("click",(e)=>{
       e.preventDefault();
       window.scrollTo({top:0, behavior:"smooth"});
@@ -430,7 +431,7 @@
       }
     });
 
-    // Smooth-scroll for hash links
+    // Smooth-scroll for hash links and clean URL
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener("click", (e)=>{
         const id = a.getAttribute("href"); if(!id || id==="#") return;
