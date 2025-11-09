@@ -27,52 +27,61 @@
     }
     a{color:var(--ink); text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Header 25% bigger */
     header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(120%) blur(8px); background:rgba(11,15,20,.55); border-bottom:1px solid rgba(230,242,255,.06)}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-    .logo{width:34px; height:34px; border-radius:12px; background:linear-gradient(135deg,var(--brand),#6aa8ff); box-shadow:0 8px 18px rgba(14,95,255,.35)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px; font-size:18px}
+    .logo{width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,var(--brand),#6aa8ff); box-shadow:0 8px 18px rgba(14,95,255,.35)}
     .nav a.btn{margin-left:10px}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid rgba(230,242,255,.12);
-      padding:12px 16px; border-radius:14px; color:var(--ink); background:rgba(14,19,26,.6); box-shadow:var(--shadow); cursor:pointer;
-      transition:.2s ease all; font-weight:600;
+      padding:14px 18px; border-radius:14px; color:var(--ink); background:rgba(14,19,26,.6); box-shadow:var(--shadow); cursor:pointer;
+      transition:.2s ease all; font-weight:600; font-size:15px;
     }
     .btn:hover{transform:translateY(-1px); border-color:rgba(230,242,255,.22)}
     .btn.primary{background:linear-gradient(135deg,var(--brand),#6aa8ff); color:#08111f; border-color:transparent}
     .btn.secondary{background:rgba(14,19,26,.85)}
     .btn.ghost{background:transparent}
-    /* Neon CTA for demo buttons */
     .btn.demo-cta{
       background:linear-gradient(135deg,var(--neon1),var(--neon2));
       color:#061217; border:0;
       box-shadow:0 0 24px rgba(50,255,180,.35), 0 8px 20px rgba(0,0,0,.35);
     }
-    .hero{padding:70px 0 30px}
-    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:start}
+
+    /* HERO ~25% larger */
+    .hero{padding:90px 0 44px}
+    .hero-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:36px; align-items:start}
     .hero-left{display:flex; flex-direction:column; align-items:center; text-align:center}
-    .h1{font-size:42px; line-height:1.08; margin:10px 0 12px; font-weight:800}
-    .sub{font-size:18px; color:var(--muted); margin:0 0 22px}
-    .cta-row{display:flex; flex-wrap:wrap; gap:12px}
-    .note{font-size:13px; color:var(--muted)}
-    .panel{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(230,242,255,.08); border-radius:var(--radius-xl); padding:18px}
-    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px}
-    .stat{background:rgba(255,255,255,.03); border:1px solid rgba(230,242,255,.06); padding:14px; border-radius:16px; text-align:center}
-    .stat b{font-size:20px}
+    .h1{font-size:52px; line-height:1.06; margin:10px 0 14px; font-weight:800}
+    .sub{font-size:20px; color:var(--muted); margin:0 0 26px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:14px}
+    .note{font-size:14px; color:var(--muted)}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(230,242,255,.08); border-radius:var(--radius-xl); padding:22px}
+
+    /* Stats bigger */
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px}
+    .stat{background:rgba(255,255,255,.03); border:1px solid rgba(230,242,255,.06); padding:18px; border-radius:18px; text-align:center}
+    .stat b{font-size:22px}
+
     section{padding:48px 0}
     .section-title{font-size:26px; margin:0 0 14px; font-weight:800}
     .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
     .value{padding:18px; border:1px solid rgba(230,242,255,.08); background:rgba(255,255,255,.03); border-radius:18px}
-    .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0}
-    .pill{padding:8px 12px; border:1px solid rgba(230,242,255,.12); border-radius:999px; font-size:12px; cursor:pointer; background:rgba(255,255,255,.03)}
+    .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 0}
+    .pill{padding:9px 14px; border:1px solid rgba(230,242,255,.12); border-radius:999px; font-size:13px; cursor:pointer; background:rgba(255,255,255,.03)}
     .pill.active{background:rgba(56,255,166,.15); border-color:rgba(56,255,166,.35)}
+
     /* Video and feature badges */
     .video-card iframe{width:100%; aspect-ratio:16/9; border-radius:16px; border:1px solid rgba(230,242,255,.12); background:#000}
-    .video-meta{display:flex; align-items:center; justify-content:space-between; margin-top:10px}
-    .kpis{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+    .video-meta{display:flex; align-items:center; justify-content:space-between; margin-top:12px}
+    .kpis{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
     .kpi{
-      font-size:13px; color:#061217; background:linear-gradient(135deg,#34d399,#a7f3d0);
-      border-radius:999px; padding:8px 12px; min-width:160px; text-align:center;
+      font-size:14px; color:#061217; background:linear-gradient(135deg,#34d399,#a7f3d0);
+      border-radius:999px; padding:10px 14px; min-width:180px; text-align:center;
     }
+
     .two-col{display:grid; grid-template-columns:1.1fr .9fr; gap:24px}
     .card{border:1px solid rgba(230,242,255,.08); background:rgba(255,255,255,.03); border-radius:18px; padding:18px}
     form{display:grid; gap:12px}
@@ -87,11 +96,13 @@
     .foot{padding:28px 0 50px; border-top:1px solid rgba(230,242,255,.06); color:var(--muted); font-size:13px}
     .hidden{display:none !important}
     iframe.booking{width:100%; height:660px; border:0; border-radius:16px; background:#0a0e13}
+
     @media (max-width:960px){
       .hero-grid, .two-col{grid-template-columns:1fr}
       .grid-3{grid-template-columns:1fr}
       .stats{grid-template-columns:1fr 1fr}
-      .h1{font-size:34px}
+      .h1{font-size:38px}
+      .sub{font-size:18px}
       .kpi{min-width:unset}
     }
   </style>
@@ -158,7 +169,7 @@
               <button class="pill" data-niche="auto">Auto Service</button>
             </div>
 
-            <div class="cta-row" style="margin-top:10px">
+            <div class="cta-row" style="margin-top:12px">
               <a class="btn secondary" href="#call" id="demoCallBtn">Prefer a walkthrough? Book a call</a>
             </div>
           </div>
