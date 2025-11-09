@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions — VoxLead.Agency</title>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; max-width: 800px; margin: 40px auto; line-height: 1.6; color: #e6f2ff; background: #0b0f14; }
+    h1, h2 { color: #38ffa6; }
+    a { color: #38ffa6; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <h1>Terms & Conditions — VoxLead.Agency</h1>
+  <p><strong>Last updated:</strong> November 9, 2025</p>
+
+  <p>By using VoxLead.Agency’s services, you agree to the following terms:</p>
+
+  <ol>
+    <li>VoxLead automates appointment communication and call handling for your business.</li>
+    <li>You are responsible for ensuring your use complies with local laws and consent regulations.</li>
+    <li>No spam, promotional, or illegal content may be sent through the platform.</li>
+    <li>VoxLead is not liable for missed appointments or delays caused by third-party providers such as Twilio.</li>
+    <li>You may cancel services anytime by emailing <a href="mailto:hello@voxlead.agency">hello@voxlead.agency</a>.</li>
+  </ol>
+
+  <p>Contact: <a href="mailto:hello@voxlead.agency">hello@voxlead.agency</a></p>
+</body>
+</html>
